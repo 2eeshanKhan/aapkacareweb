@@ -32,7 +32,7 @@ import DoctorDetails from "@/components/Doctors/DoctorDetails";
 
 // No need to make the page function async
 export default async function DoctorPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
 
   return <DoctorDetails id={id} />;
 }
