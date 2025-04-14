@@ -65,10 +65,10 @@ export async function generateMetadata({ params }) {
 
   return {
     title: doctor.name,
-    description: doctor.description || `Profile of Dr. ${doctor.name}`,
+    description: doctor.about || `Profile of ${doctor.name}`,
     openGraph: {
       title: doctor.name,
-      description: doctor.description,
+      description: doctor.about,
       url: `https://yourdomain.com/doctor/${id}`,
       images: [
         {
