@@ -12,7 +12,7 @@ const camps = [
   { id: 1, date: "10 Feb, 2024", title: "First Global", image: "/images/camp-1.png" },
   { id: 2, date: "12 Feb, 2024", title: "Anarock Thane Camp", image: "/images/camp-2.png" },
   { id: 3, date: "1 Mar, 2024", title: "Dainik Bhaskar Group", image: "/images/camp-3.png" },
-  { id: 4, date: "1 Mar, 2024", title: "Dainik Bhaskar Group", image: "/images/camp-4.png" },
+  // { id: 4, date: "1 Mar, 2024", title: "Dainik Bhaskar Group", image: "/images/camp-4.png" },
 ];
 
 const CareCamps = () => {

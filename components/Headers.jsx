@@ -20,6 +20,7 @@ import {
   FaToiletPaper,
   FaWeight,
   FaBlog,
+  FaCloudDownloadAlt
 } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -45,8 +46,9 @@ const Header = () => {
 
   const menuItems = [
     { name: 'Home', path: '/', icon: <FaHome className="text-blue-600" /> },
-    { name: 'Hospitals', path: '/search-hospital', icon: <FaHospital className="text-green-600" /> },
-    { name: 'Doctors', path: '/search-doctor', icon: <FaUserMd className="text-indigo-600" /> },
+    { name: 'Hospitals', path: '/search-hospital', icon: <FaHospital className="text-green-600 md:text-white" /> },
+    { name: 'Doctors', path: '/search-doctor', icon: <FaUserMd className="text-indigo-600 md:text-white" /> },
+    { name: 'Download', path: 'https://play.google.com/store/apps/details?id=com.fuertedevelopers.aapkacare&hl=en_IN', icon: <FaCloudDownloadAlt className="text-cyan-600 md:text-white" /> },
     {
       name: 'Ophthalmology', icon: <FaEye className="text-purple-600" />, subLinks: [
         { name: 'Cataract', path: '/cataract' },
@@ -123,7 +125,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden sm:flex space-x-4">
-            {[menuItems[1], menuItems[2]].map((item, index) => (
+            {[menuItems[1], menuItems[2],menuItems[3]].map((item, index) => (
               <button
                 key={index}
                 onClick={() => handleNavClick(item.path)}
@@ -138,17 +140,17 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Icon */}
-          <FaBars className="text-3xl cursor-pointer sm:hidden" onClick={toggleSideMenu} />
+          <FaBars className="text-3xl cursor-pointer md:hidden" onClick={toggleSideMenu} />
         </div>
       </div>
 
       {/* Sidebar / Mobile Menu */}
-      {toggle && (
+      {/* {toggle && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 z-50">
           <div className="fixed top-0 left-0 w-72 h-full bg-white text-black p-4 overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-bold">Menu</h2>
-              <FaTimes className="text-2xl cursor-pointer" onClick={hideSideMenu} />
+              <h2 className="text-lg font-bold text-sky-700">Aapka Care</h2>
+              <FaTimes className="text-2xl cursor-pointer text-sky-800" onClick={hideSideMenu} />
             </div>
             <nav className="space-y-2">
               {menuItems.map((item, idx) => (
@@ -178,7 +180,7 @@ const Header = () => {
                                 key={subIdx}
                                 onClick={() => handleNavClick(sub.path)}
                                 className={`block w-full text-left px-2 py-1 rounded-md hover:bg-gray-200 ${
-                                  activePath === sub.path ? 'bg-orange-100 font-semibold' : ''
+                                  activePath === sub.path ? 'bg-blue-300 font-semibold' : ''
                                 }`}
                               >
                                 {sub.name}
@@ -192,7 +194,7 @@ const Header = () => {
                     <button
                       onClick={() => handleNavClick(item.path)}
                       className={`w-full flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 text-left ${
-                        activePath === item.path ? 'bg-orange-200 font-semibold' : ''
+                        activePath === item.path ? 'bg-blue-300 font-semibold' : ''
                       }`}
                     >
                       {item.icon} {item.name}
@@ -203,7 +205,72 @@ const Header = () => {
             </nav>
           </div>
         </div>
-      )}
+      )} */}
+
+{toggle && (
+  <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40">
+    {/* Drawer */}
+    <div className="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 text-black p-4 overflow-y-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-bold text-sky-700">Aapka Care</h2>
+        <FaTimes className="text-2xl cursor-pointer text-sky-800" onClick={hideSideMenu} />
+      </div>
+
+      <nav className="space-y-2">
+        {menuItems.map((item, idx) => (
+          <div key={idx}>
+            {item.subLinks ? (
+              <div>
+                <button
+                  className="w-full flex justify-between items-center p-2 hover:bg-gray-100 rounded-md"
+                  onClick={() =>
+                    setOpenDropdown(openDropdown === idx ? null : idx)
+                  }
+                >
+                  <span className="flex items-center gap-2">{item.icon} {item.name}</span>
+                  {openDropdown === idx ? <FaChevronUp /> : <FaChevronDown />}
+                </button>
+                <AnimatePresence>
+                  {openDropdown === idx && (
+                    <motion.div
+                      className="ml-4 mt-1 space-y-1"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {item.subLinks.map((sub, subIdx) => (
+                        <button
+                          key={subIdx}
+                          onClick={() => handleNavClick(sub.path)}
+                          className={`block w-full text-left px-2 py-1 rounded-md hover:bg-gray-200 ${
+                            activePath === sub.path ? 'bg-blue-300 font-semibold' : ''
+                          }`}
+                        >
+                          {sub.name}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <button
+                onClick={() => handleNavClick(item.path)}
+                className={`w-full flex items-center gap-2 p-2 rounded-md hover:bg-gray-100 text-left ${
+                  activePath === item.path ? 'bg-blue-300 font-semibold' : ''
+                }`}
+              >
+                {item.icon} {item.name}
+              </button>
+            )}
+          </div>
+        ))}
+      </nav>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

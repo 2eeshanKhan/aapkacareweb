@@ -93,7 +93,9 @@ const HospitalList = () => {
         transition={{ duration: 0.4 }}
       >
         {loading ? (
-          <p className="text-center text-gray-200 col-span-3">Loading...</p>
+          <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sky-500"></div>
+        </div>
         ) : filteredHospitals.length > 0 ? (
           filteredHospitals.map((hospital, index) => (
             <motion.div

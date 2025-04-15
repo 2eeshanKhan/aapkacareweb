@@ -101,8 +101,12 @@ const DoctorDetails = ({ id }) => {
     fetchDoctor();
   }, [id]);
 
-  if (loading) return <div className="p-10 text-white text-center">Loading...</div>;
-  if (!doctor) return <div className="p-10 text-red-400 text-center">Doctor not found</div>;
+  if (loading) return <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+  <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sky-500"></div>
+</div>;
+  if (!doctor) return <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+  <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sky-500"></div>
+</div>;
 
   return (
     <>
