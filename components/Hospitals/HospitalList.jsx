@@ -51,7 +51,7 @@ const HospitalList = () => {
   }, [search, hospitals]);
 
   const handleClickEvent = (uId) => {
-    console.log("Hospital ID being sent:", uId); // ✅ Add this
+   
 
   
     router.push(`/hospital?id=${uId}`);
@@ -93,9 +93,10 @@ const HospitalList = () => {
         transition={{ duration: 0.4 }}
       >
         {loading ? (
-          <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sky-500"></div>
-        </div>
+         <div className="absolute top-0 left-0 w-full h-screen flex items-center justify-center bg-white/70 z-50">
+         <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sky-500"></div>
+       </div>
+       
         ) : filteredHospitals.length > 0 ? (
           filteredHospitals.map((hospital, index) => (
             <motion.div

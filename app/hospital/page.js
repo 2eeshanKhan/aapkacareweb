@@ -5,9 +5,10 @@ import { Suspense } from 'react';
 
 const HospitalDetailsRoute = () => {
   return (
-    <Suspense fallback={<div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+    <Suspense fallback={<div className="absolute top-0 left-0 w-full h-screen flex items-center justify-center bg-white/70 z-50">
       <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sky-500"></div>
-    </div>}>
+    </div>
+    }>
       <HospitalRoute />
     </Suspense>
   );

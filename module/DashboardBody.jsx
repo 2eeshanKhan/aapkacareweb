@@ -200,18 +200,7 @@ const   HeroSection = () => {
         />
       </div>
 
-      {/* Appointment Date */}
-      {/* <div>
-        <label className="block mb-1 text-sm font-semibold">Preferred Date</label>
-        <input
-          type="date"
-          name="date"
-          className="w-full p-3 rounded text-black bg-white"
-          value={formData.date}
-          onChange={handleChange}
-          required
-        />
-      </div> */}
+     
 
 <div>
   <label className="block mb-1 text-sm font-semibold">Preferred Date</label>
