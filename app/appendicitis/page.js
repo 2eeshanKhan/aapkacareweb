@@ -1,5 +1,12 @@
 import React from 'react'
 import  Appendicitis from '@/components/Laparoscopy/Appendicitis'
+export const metadata  = {
+  title: 'Appendicitis Treatment – Prompt, Expert Care with Minimal Downtime',
+  description: 'Emergency appendicitis surgery with precision and care. Affordable treatment with quick recovery and minimal discomfort.',
+  keywords: 'Appendicitis Surgery',
+  
+
+}
 
 const AppendicitisPage = () => {
   return (

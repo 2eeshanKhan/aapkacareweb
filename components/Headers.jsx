@@ -46,8 +46,8 @@ const Header = () => {
 
   const menuItems = [
     { name: 'Home', path: '/', icon: <FaHome className="text-blue-600" /> },
-    { name: 'Hospitals', path: '/search-hospital', icon: <FaHospital className="text-green-600 md:text-white" /> },
-    { name: 'Doctors', path: '/search-doctor', icon: <FaUserMd className="text-indigo-600 md:text-white" /> },
+    { name: 'Hospitals', path: '/find-hospital', icon: <FaHospital className="text-green-600 md:text-white" /> },
+    { name: 'Doctors', path: '/find-doctor', icon: <FaUserMd className="text-indigo-600 md:text-white" /> },
     { name: 'Download', path: 'https://play.google.com/store/apps/details?id=com.fuertedevelopers.aapkacare&hl=en_IN', icon: <FaCloudDownloadAlt className="text-cyan-600 md:text-white" /> },
     {
       name: 'Ophthalmology', icon: <FaEye className="text-purple-600" />, subLinks: [
