@@ -6,7 +6,7 @@ const PrivacyPage = () => {
       <h1 className="text-4xl font-bold mb-6 text-center">Fuerte Health Care Private Limited Privacy Policy</h1>
       <div className="space-y-6 text-justify">
         <p>
-          Fuerte Health Care Pvt Ltd ("Aapka Care"), a company incorporated in India, having its corporate office at 8th Floor, Spaze Platinum Tower, Sector-47, Gurgaon-122001. The terms ‘We’, ‘Us’, ‘Company’, and ‘Our’ refer to Aapka Care and Fuerte Health Care Pvt Ltd.
+          Fuerte Health Care Pvt Ltd (&quot;Aapka Care&quot;), a company incorporated in India, having its corporate office at 8th Floor, Spaze Platinum Tower, Sector-47, Gurgaon-122001. The terms ‘We’, ‘Us’, ‘Company’, and ‘Our’ refer to Aapka Care and Fuerte Health Care Pvt Ltd.
         </p>
 
         <p>
@@ -14,11 +14,11 @@ const PrivacyPage = () => {
           <a href="https://www.aapkacare.com" className="text-blue-600 underline">
             https://www.aapkacare.com
           </a>{" "}
-          and the Aapka Care mobile application (the URLs and mobile application together referred to as "Websites" and individually a "Website"). The terms 'You' or 'Your' refer to you as the user (whether you are a Registered User or Unregistered User) of the Website or of the services offered by the Website ("Service").
+          and the Aapka Care mobile application (the URLs and mobile application together referred to as &quot;Websites&quot; and individually a &quot;Website&quot;). The terms 'You' or 'Your' refer to you as the user (whether you are a Registered User or Unregistered User) of the Website or of the services offered by the Website (&quot;Service&quot;).
         </p>
 
         <p>
-          Aapka Care and Fuerte Health Care Pvt Ltd are committed to your privacy. This privacy policy ("Privacy Policy") applies to the collection, use, storage, processing, disclosure, and transfer of your information when you use the Website and/or the Services.
+          Aapka Care and Fuerte Health Care Pvt Ltd are committed to your privacy. This privacy policy (&quot;Privacy Policy&quot;) applies to the collection, use, storage, processing, disclosure, and transfer of your information when you use the Website and/or the Services.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8">Important Note</h2>
@@ -28,13 +28,13 @@ const PrivacyPage = () => {
 
         <h2 className="text-2xl font-semibold mt-8">Who This Policy Applies To</h2>
         <ul className="list-disc list-inside ml-4">
-          <li>A patient, his/her representatives/attendant/relative/friend or affiliates (“you” or “User”)</li>
-          <li>A user of the Website (“you” or “User”)</li>
+          <li>A patient, his/her representatives/attendant/relative/friend or affiliates (&ldquo;you&rdquo; or &ldquo;User&rdquo;)</li>
+          <li>A user of the Website (&ldquo;you&rdquo; or &ldquo;User&rdquo;)</li>
         </ul>
 
         <h2 className="text-2xl font-semibold mt-8">Information About Aapka Care</h2>
         <p>
-          In this Privacy Policy, references to the terms ‘We’, ‘Us’, ‘Company’, and ‘Our’ refer to Aapka Care and Fuerte Health Care Pvt Ltd. Aapka Care is the author and publisher of the internet resource https://www.aapkacare.com on the world wide web as well as other connected software and applications provided by Aapka Care.
+          In this Privacy Policy, references to the terms &lsquo;We&rsquo;, &lsquo;Us&rsquo;, &lsquo;Company&rsquo;, and &lsquo;Our&rsquo; refer to Aapka Care and Fuerte Health Care Pvt Ltd. Aapka Care is the author and publisher of the internet resource https://www.aapkacare.com on the world wide web as well as other connected software and applications provided by Aapka Care.
         </p>
 
         <p>
@@ -61,7 +61,7 @@ const PrivacyPage = () => {
         </p>
 
         <p>
-          We may automatically track certain information about you based upon user behaviour. We use this information to do internal research on our Users’ demographics and interests to better understand, protect, and serve our Users. This information is compiled and analyzed on an aggregate basis. We use data collection devices such as ‘cookies’ on certain pages of the Website to help analyze our web page flow, measure page effectiveness, and promote trust and safety.
+          We may automatically track certain information about you based upon user behaviour. We use this information to do internal research on our Users&rsquo; demographics and interests to better understand, protect, and serve our Users. This information is compiled and analyzed on an aggregate basis. We use data collection devices such as &lsquo;cookies&rsquo; on certain pages of the Website to help analyze our web page flow, measure page effectiveness, and promote trust and safety.
         </p>
 
         <p>
@@ -78,7 +78,7 @@ const PrivacyPage = () => {
 
         <h2 className="text-2xl font-semibold mt-8">Retention Period</h2>
         <p>
-          We retain your personal information in accordance with Aapka Care’s records retention policies or any retention periods prescribed by law or recommended by regulators, industry bodies, or associations. However, there may be circumstances that mean we must retain your personal information for longer.
+          We retain your personal information in accordance with Aapka Care&rsquo;s records retention policies or any retention periods prescribed by law or recommended by regulators, industry bodies, or associations. However, there may be circumstances that mean we must retain your personal information for longer.
         </p>
 
         <h2 className="text-2xl font-semibold mt-8">Your Consent or User Consent</h2>
@@ -94,12 +94,9 @@ const PrivacyPage = () => {
           Aapka Care app needs certain permissions to connect with our expert doctors. This will help us to serve you better. Please allow access for the following permissions:
         </p>
         <ul className="list-disc pl-6 space-y-2">
-        
           <li><strong>Location:</strong> To show doctors near your location.</li>
           <li><strong>Files and Media:</strong> To upload records from gallery and view your vaccination and test records.</li>
           <li><strong>Storage:</strong> To store your personal information for quick access.</li>
-        
-         
         </ul>
 
         <p>
@@ -113,4 +110,4 @@ const PrivacyPage = () => {
   );
 }
 
-export default PrivacyPage
+export default PrivacyPage;
