@@ -5,7 +5,7 @@ import Header from '@/components/Layouts';
 
 export default function ClientLayout({ children }) {
   const pathname = usePathname();
-  const hideHeaderPaths = ['/lasik/book-consultancy', '/lasik/book-consultancy/'];
+  const hideHeaderPaths = ['/lasik/book-consultancy', '/lasik/book-consultancy/','/kidney-stones/book-consultancy','/kidney-stones/book-consultancy/'];
 
   const showHeader = !hideHeaderPaths.includes(pathname);
 
