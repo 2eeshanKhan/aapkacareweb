@@ -283,61 +283,7 @@ export default function KidneyBooking() {
           <p className="text-sm font-medium">Cities Served</p>
         </div>
       </div>
-      {/* <section className="py-20 px-6 max-w-6xl mx-auto">
-  <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900 leading-tight">
-  Why You Should Not Delay Operation ?
-</h2>
-  <ul className="space-y-8 text-lg text-gray-700">
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-blue-600" />
-      <span className="font-medium text-gray-800">Avoid Permanent Damage to Kidneys
-      </span>
-    </li>
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-green-600" />
-      <span className="font-medium text-gray-800">Get Immediate Relief and Restore Kidney Function
-      </span>
-    </li>
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-orange-600" />
-      <span className="font-medium text-gray-800">Avoid Chances of UTI Infections
-      </span>
-    </li>
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-orange-600" />
-      <span className="font-medium text-gray-800">Stone Size &gt;5mm can only be removed by Surgery
-
-      </span>
-    </li>
-  </ul>
-</section>
-
-<section className="bg-gradient-to-r from-blue-50 via-blue-200 to-blue-50 py-20 px-6">
-  <div className="max-w-6xl mx-auto text-center">
-    <h2 className="text-4xl font-extrabold mb-12 text-gray-900 leading-tight">
-    What is the Cost of Operation?
-
-    </h2>
-    <ul className="space-y-8 text-lg text-gray-700">
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-blue-600" />
-        <span className="font-medium text-gray-800">Size, Location & Number of Stones
-        </span>
-      </li>
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-green-600" />
-        <span className="font-medium text-gray-800">Technique & Equipment used
-        </span>
-      </li>
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-orange-600" />
-        <span className="font-medium text-gray-800">Any other pre-existing medical condition
-        </span>
-      </li>
    
-    </ul>
-  </div>
-</section> */}
 
 <section className="py-20 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-10">
   {/* First Section */}
@@ -473,29 +419,7 @@ export default function KidneyBooking() {
 </section>
 </div>
 </section>
-{/* <section className="bg-gradient-to-r from-slate-200 to-white py-16 px-6">
-  <div className="max-w-6xl mx-auto text-center text-white">
-    <h2 className="text-4xl font-bold mb-8 tracking-tight text-black">Why Choose Aapka Care?</h2>
-    <ul className="space-y-6 text-lg">
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium text-black">30% off On Diagnostics</span>
-      </li>
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium text-black">Free Pickup & Drop</span>
-      </li>
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium text-black">No-Cost EMI Option</span>
-      </li>
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium text-black">Complete Paperwork Support by Our Team</span>
-      </li>
-    </ul>
-  </div>
-</section> */}
+
 
 <section className="bg-gradient-to-br from-slate-100 via-white to-slate-100 py-20 px-6">
   <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-10">
