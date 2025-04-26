@@ -3,20 +3,119 @@
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons'; 
-import React from 'react';
+import { faCheck,faChevronDown  } from '@fortawesome/free-solid-svg-icons'; 
+import React, { useState } from 'react';
+import { getFirestore, doc, setDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { initializeApp } from 'firebase/app';
+import { db } from "@/module/firebaseConfig";
 
-export default function Home() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    alert(`Thank you, ${data.name}! We will contact you shortly.`);
-  };
+
+
+export default function LasikBooking() {
+    const {
+        register: registerForm1,
+        handleSubmit: handleSubmitForm1,
+        formState: { errors: errorsForm1 },
+      } = useForm();
+    
+      const {
+        register: registerForm2,
+        handleSubmit: handleSubmitForm2,
+        formState: { errors: errorsForm2 },
+      } = useForm();
+    
+      const onSubmitForm1 = async (data) => {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+        const yearMonth = `${currentYear}${currentMonth}`;
+      
+        // Create document ID as the current year
+        const docRef = doc(db, 'AllLasik', currentYear.toString());
+      
+        // Set the subcollection (e.g., 202504 for April 2025)
+        const subcollectionRef = collection(docRef, yearMonth);
+      
+        // Create a server timestamp and convert it to a string
+        const timestamp = new Date().toISOString(); // Converts timestamp to string in ISO format
+      
+        // Save the data
+        try {
+          await setDoc(doc(subcollectionRef, timestamp), {
+            name: data.name,
+            phone: data.mobile,
+            insurance: data.insurance,
+            createdAt: serverTimestamp(), // Store Firebase server timestamp
+          });
+          console.log('Document successfully written!');
+        } catch (e) {
+          console.error('Error adding document: ', e);
+        }
+      
+        console.log('Form 1:', data);
+        alert(`Thank you, ${data.name}! We will contact you shortly.`);
+      };
+      
+    
+      const onSubmitForm2 = async(data) => {
+        const currentYear = new Date().getFullYear();
+        const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+        const yearMonth = `${currentYear}${currentMonth}`;
+      
+        // Create document ID as the current year
+        const docRef = doc(db, 'AllLasik', currentYear.toString());
+      
+        // Set the subcollection (e.g., 202504 for April 2025)
+        const subcollectionRef = collection(docRef, yearMonth);
+      
+        // Create a server timestamp and convert it to a string
+        const timestamp = new Date().toISOString(); // Converts timestamp to string in ISO format
+      
+        // Save the data
+        try {
+          await setDoc(doc(subcollectionRef, timestamp), {
+            name: data.name,
+            phone: data.mobile,
+            insurance: data.insurance,
+            createdAt: serverTimestamp(), // Store Firebase server timestamp
+          });
+          console.log('Document successfully written!');
+        } catch (e) {
+          console.error('Error adding document: ', e);
+        }
+        console.log('Form 2:', data);
+        alert(`Thank you, ${data.name}! We will contact you shortly.`);
+      };
+  const faqData = [
+    {
+      question: 'Am I eligible for LASIK/Contoura vision treatment?',
+      answer: 'Generally, a suitable candidate will be at least 18 years of age, have had a stable vision for the last 12 months, is not pregnant, is free of certain diseases of the cornea and retina and is generally in good health.'
+    },
+    {
+      question: 'Is LASIK surgery painful?',
+      answer: 'Not at all. It is a bladeless, stitchless, and painless procedure that takes just about 20 minutes.'
+    },
+    {
+        question: 'Is the procedure safe?',
+        answer: 'LASIK is considered to be very safe. Over 10 million cases have been performed worldwide in the last decade.'
+      },
+      {
+        question: 'Will my vision be corrected forever?',
+        answer: 'Once the cornea has been modified it tends to stay modified permanently. The vast majority of corrected eyes remain stable, permanently correcting near-sightedness, far-sightedness and astigmatism.'
+      },
+      {
+        question: 'How will I know which treatment is best for me ?',
+        answer: 'Your surgeon will advise this after a thorough examination at a consultation.'
+      },
+    {
+      question: 'How soon can I get back to normal, drive, play sport or go to work?',
+      answer: 'Most people return to work and drive the day after lasik surgery.'
+    },
+    {
+        question: 'Are Aapka Care Ophthalmologists Reliable?',
+        answer: 'Yes, ophthalmologists at Aapka Care are highly reliable. They come with years of experience of treating different eye problems for men and women of all age groups.'
+      }
+  ];
   const advantages = [
     { label: 'Stitches', micro: 'NO STITCHES', femto: 'NO STITCHES' },
     { label: 'Precision', micro: 'PRECISE', femto: 'MORE PRECISE' },
@@ -26,6 +125,12 @@ export default function Home() {
     { label: 'Safety', micro: 'SAFER', femto: 'MORE SAFER' },
     { label: 'Accuracy', micro: 'ACCURATE', femto: 'MORE ACCURATE' },
   ];
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleAnswer = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
 
   return (
     <main className="min-h-screen bg-white font-sans">
@@ -83,51 +188,81 @@ export default function Home() {
           </h3>
 
 
-<form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-  <div>
-    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Your Name</label>
-   
-    <input
-  id="name"
-  type="text"
-  placeholder="Enter your full name"
-  {...register('name', {
-    required: true,
-    pattern: /^[a-zA-Z\s]+$/, // Only allows alphabets and spaces
-  })}
-  className="w-full px-4 py-3 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
-/>
-{errors.name && (
-  <p className="text-red-500 text-sm mt-1">
-    {errors.name.type === 'required' ? 'Name is required.' : 'Only alphabets are allowed (no emojis, dots, or special characters).'}
-  </p>
-)}
-  </div>
-  
-  <div>
-    <label htmlFor="mobile" className="block text-sm font-medium text-gray-700">Mobile Number</label>
-    <input
-      id="mobile"
-      type="tel"
-      placeholder="Enter your 10-digit mobile number"
-      {...register('mobile', {
-        required: true,
-        pattern: /^[0-9]{10}$/,
-      })}
-      className="w-full px-4 py-3 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
-    />
-    {errors.mobile && (
-      <p className="text-red-500 text-sm mt-1">Enter a valid 10-digit number.</p>
-    )}
-  </div>
+<form onSubmit={handleSubmitForm1(onSubmitForm1)} className="space-y-6">
+            <div>
+              <label htmlFor="name1" className="block text-sm font-medium text-gray-700">Your Name</label>
+              <input
+                id="name1"
+                type="text"
+                placeholder="Enter your full name"
+                {...registerForm1('name', {
+                  required: true,
+                  pattern: /^[a-zA-Z\s]+$/,
+                })}
+                className="w-full px-4 py-3 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
+              />
+              {errorsForm1.name && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errorsForm1.name.type === 'required'
+                    ? 'Name is required.'
+                    : 'Only alphabets are allowed.'}
+                </p>
+              )}
+            </div>
 
-  <button
-    type="submit"
-    className="bg-sky-600 hover:bg-sky-700 w-full py-3 rounded-md text-white font-semibold text-lg transition-all shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500"
-  >
-    Get Your Estimate
-  </button>
-</form>
+            <div>
+              <label htmlFor="mobile1" className="block text-sm font-medium text-gray-700">Mobile Number</label>
+              <input
+                id="mobile1"
+                type="tel"
+                placeholder="Enter your 10-digit mobile number"
+                {...registerForm1('mobile', {
+                  required: true,
+                  pattern: /^[0-9]{10}$/,
+                })}
+                className="w-full px-4 py-3 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
+              />
+              {errorsForm1.mobile && (
+                <p className="text-red-500 text-sm mt-1">Enter a valid 10-digit number.</p>
+              )}
+            </div>
+            <div>
+  <label className="block text-sm font-medium text-gray-700 mb-4">
+    Do you have insurance?
+  </label>
+  <div className="flex gap-6">
+    <label className="flex items-center gap-2">
+      <input
+        type="radio"
+        value="Yes"
+        {...registerForm1('insurance', { required: true })}
+      />
+      Yes
+    </label>
+    <label className="flex items-center gap-2">
+      <input
+        type="radio"
+        value="No"
+        {...registerForm1('insurance', { required: true })}
+      />
+      No
+    </label>
+  </div>
+  {errorsForm1.insurance && (
+    <p className="text-red-500 text-sm mt-1">Please select an option.</p>
+  )}
+</div>
+
+<button
+  type="submit"
+  className="bg-sky-600 hover:bg-sky-700 w-full py-3 rounded-md text-white font-semibold text-lg transition-all shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500"
+>
+  Get Your Estimate
+</button>
+
+
+           
+          </form>
 
         </motion.div>
       </section>
@@ -211,38 +346,83 @@ export default function Home() {
       </p>
     </div>
     
-    {/* Right Section: Form */}
-    <div className="bg-slate-700 p-10 rounded-xl shadow-lg transition-transform transform hover:scale-102 hover:shadow-xl">
-      <form className="space-y-6">
-        <input 
-          type="text" 
-          placeholder="Your Name" 
-          className="border border-gray-300 w-full p-4 rounded-lg text-base text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition duration-300"
-        />
-        <input 
-          type="text" 
-          placeholder="Mobile Number" 
-          className="border border-gray-300 w-full p-4 rounded-lg text-base text-black bg-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition duration-300"
-        />
-        <div className="space-y-4">
-          <button className="w-full py-4 rounded-lg text-white text-lg font-semibold bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-600 transition duration-300">
-            Get Cost Estimate Now
-          </button>
-          <button className="w-full py-4 rounded-lg text-white text-lg bg-amber-900 font-semibold border-2 border-gray-300 hover:bg-gray-100 hover:text-indigo-600 transition duration-300">
-            Talk to Our Expert
-          </button>
-        </div>
-      </form>
-    </div>
+   
+
+    {/* Second Form: Another Booking or Contact Form */}
+<section className="px-6 md:px-20 py-16 bg-gray-100">
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    className="bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto"
+  >
+    <h3 className="text-2xl font-bold mb-6 text-gray-800">
+      Book a Free LASIK Consultation
+    </h3>
+    <form onSubmit={handleSubmitForm2(onSubmitForm2)} className="space-y-4 max-w-lg">
+          <input
+            type="text"
+            placeholder="Your Name"
+            {...registerForm2('name', {
+              required: true,
+              pattern: /^[a-zA-Z\s]+$/,
+            })}
+            className="w-full px-4 py-3 rounded-md border border-gray-300"
+          />
+          {errorsForm2.name && (
+            <p className="text-red-500 text-sm">Name is required and should contain only letters.</p>
+          )}
+
+          <input
+            type="tel"
+            placeholder="Mobile Number"
+            {...registerForm2('mobile', {
+              required: true,
+              pattern: /^[0-9]{10}$/,
+            })}
+            className="w-full px-4 py-3 rounded-md border border-gray-300"
+          />
+          {errorsForm2.mobile && (
+            <p className="text-red-500 text-sm">Valid 10-digit number required.</p>
+          )}
+          <div>
+  <label className="block text-sm font-medium text-gray-700 mb-4">
+    Do you have insurance?
+  </label>
+  <div className="flex gap-6">
+    <label className="flex items-center gap-2">
+      <input
+        type="radio"
+        value="Yes"
+        {...registerForm2('insurance', { required: true })}
+      />
+      Yes
+    </label>
+    <label className="flex items-center gap-2">
+      <input
+        type="radio"
+        value="No"
+        {...registerForm2('insurance', { required: true })}
+      />
+      No
+    </label>
   </div>
+  {errorsForm2.insurance && (
+    <p className="text-red-500 text-sm mt-1">Please select an option.</p>
+  )}
+</div>
+
+<button
+  type="submit"
+  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md shadow-lg"
+>
+  Submit
+</button>
+</form>
+</motion.div>
 </section>
-
-
-
-
-
-
-
+</div>
+</section>
 <section className="bg-gradient-to-r from-sky-500 to-sky-700 py-16 px-6">
   <div className="max-w-6xl mx-auto text-center text-white">
     <h2 className="text-4xl font-bold mb-8 tracking-tight">Why Choose Aapka Care?</h2>
@@ -293,10 +473,22 @@ export default function Home() {
       </table>
     </div>
 
-    <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10">
-      <button className="bg-orange-500 text-white py-4 px-8 rounded-lg hover:bg-orange-600 transition">Talk to Our Expert</button>
-      <button className="bg-blue-600 text-white py-4 px-8 rounded-lg hover:bg-blue-700 transition">Book Appointment Now</button>
-    </div>
+ 
+
+<section className="py-10 px-6 max-w-xl mx-auto">
+        <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10">
+          <a href="tel:9821527088">
+            <button className="bg-orange-500 text-white py-4 px-8 rounded-lg hover:bg-orange-600 transition">
+              Talk to Our Expert
+            </button>
+          </a>
+          <a href="tel:9821527088">
+            <button className="bg-blue-600 text-white py-4 px-8 rounded-lg hover:bg-blue-700 transition">
+              Book Appointment Now
+            </button>
+          </a>
+        </div>
+      </section>
   </div>
 </section>
 
@@ -329,19 +521,38 @@ export default function Home() {
     </div>
 </section>
 
-<section className="py-16 px-6 bg-gray-50">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-4xl font-semibold text-center mb-8 text-gray-900">Frequently Asked Questions (FAQs)</h2>
-    <div className="space-y-6">
-      <div className="p-6 bg-white rounded-lg shadow-xl">
-        <h3 className="font-semibold text-xl">Am I eligible for LASIK/Contoura vision treatment?</h3>
-      </div>
-      <div className="p-6 bg-white rounded-lg shadow-xl">
-        <h3 className="font-semibold text-xl">How soon can I get back to normal activities?</h3>
-      </div>
-    </div>
-  </div>
-</section>
+<section className="py-20 px-6 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900 leading-tight">
+          Frequently Asked Questions
+        </h2>
+        <div className="space-y-6">
+          {faqData.map((faq, index) => (
+            <div
+              key={index}
+              className="border border-gray-300 rounded-xl p-4 bg-white shadow-sm cursor-pointer"
+              onClick={() => toggleAnswer(index)}
+            >
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {faq.question}
+                </h3>
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  className={`transition-transform duration-300 ${
+                    openIndex === index ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+              {openIndex === index && (
+                <p className="mt-3 text-gray-700 text-base leading-relaxed">
+                  {faq.answer}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
 
 <footer className="py-8 bg-blue-900 text-white text-center text-sm">
   &copy; 2025 Aapka Care. All rights reserved.
