@@ -55,13 +55,12 @@ export default function BlogPage() {
     <div className="bg-gray-50 text-gray-800">
       <section
         className="relative bg-cover bg-center h-[500px] text-white"
-        style={{ backgroundImage: "url('/images/blogui.jpg')" }}
+        style={{ backgroundImage: "url('/images/blogui.png')" }}
       >
         <div className="absolute inset-0 bg-opacity-40 flex flex-col justify-end p-10">
-          <p className="text-sm uppercase mb-2">Destination</p>
-          <h1 className="text-4xl font-bold mb-2">Exploring the Wonders of Hiking</h1>
-          <p className="text-sm mb-4">An iconic landmark, this post unveils the secrets that make this destination a traveler’s paradise.</p>
-          <div className="text-xs">24 Jan 2024 · 10 mins read · Theodore Reginald</div>
+         
+          <h1 className="text-4xl font-bold mb-2 text-black">Aapka Care Blog: Health Tips, Expert Advice, Latest Healthcare Insights</h1>
+          
         </div>
       </section>
 
