@@ -185,7 +185,7 @@ const KidneyStoneAdsPage = () => {
           ))}
         </div>
 
-        <div className="hidden md:block fixed top-[100px] right-10 z-50 w-[350px]">
+        {/* <div className="hidden md:block fixed top-[100px] right-10 z-50 w-[350px]">
           <div className="bg-white shadow-xl rounded-xl p-6">
             <h3 className="text-2xl font-bold text-black mb-4 text-center">Book Free Consultation</h3>
             <input
@@ -246,7 +246,71 @@ const KidneyStoneAdsPage = () => {
               BOOK NOW
             </button>
           </div>
-        </div>
+        </div> */}
+        
+
+        <div className="md:fixed top-[100px] right-4 sm:right-10 z-50 w-[85%] max-w-[320px] mx-auto md:mx-0 md:w-[350px] my-6 md:my-0">
+  <div className="bg-white shadow-xl rounded-xl p-4 sm:p-6">
+    <h3 className="text-xl sm:text-2xl font-bold text-black mb-4 text-center">Book Free Consultation</h3>
+    <input
+      name="name"
+      type="text"
+      placeholder="Patient Name"
+      value={formData.name}
+      onChange={handleChange}
+      className="border w-full mb-1 px-3 py-2 rounded focus:outline-none text-sm sm:text-base"
+      aria-label="Patient Name"
+    />
+    {formErrors.name && <p className="text-red-500 text-xs sm:text-sm mb-2">{formErrors.name}</p>}
+    <input
+      name="mobile"
+      type="text"
+      placeholder="+91 Mobile Number"
+      value={formData.mobile}
+      onChange={handleChange}
+      className="border w-full mb-1 px-3 py-2 rounded focus:outline-none text-sm sm:text-base"
+      aria-label="Mobile Number"
+    />
+    {formErrors.mobile && <p className="text-red-500 text-xs sm:text-sm mb-2">{formErrors.mobile}</p>}
+    <div className="mb-4">
+      <p className="font-medium text-gray-800 mb-2 text-sm sm:text-base">Do you have insurance?</p>
+      <div className="flex gap-4">
+        <label className="flex items-center gap-1 text-gray-700 text-sm sm:text-base">
+          <input
+            type="radio"
+            name="insurance"
+            value="yes"
+            checked={formData.insurance === 'yes'}
+            onChange={handleChange}
+            className="accent-red-500"
+            aria-label="Insurance Yes"
+          />
+          Yes
+        </label>
+        <label className="flex items-center gap-1 text-gray-700 text-sm sm:text-base">
+          <input
+            type="radio"
+            name="insurance"
+            value="no"
+            checked={formData.insurance === 'no'}
+            onChange={handleChange}
+            className="accent-red-500"
+            aria-label="Insurance No"
+          />
+          No
+        </label>
+      </div>
+      {formErrors.insurance && <p className="text-red-500 text-xs sm:text-sm mt-1">{formErrors.insurance}</p>}
+    </div>
+    <button
+      onClick={handleSubmit}
+      className="w-full bg-red-400 hover:bg-red-500 text-white py-2 rounded-full font-semibold text-sm sm:text-base"
+      aria-label="Book Consultation"
+    >
+      BOOK NOW
+    </button>
+  </div>
+</div>
       </section>
 
       <div className="flex px-4 md:px-10 mt-10 gap-4">
@@ -300,7 +364,7 @@ const KidneyStoneAdsPage = () => {
               ></div>
               <div className="bg-white p-6 rounded-xl shadow-xl w-[90%] max-w-md z-50">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-xl font-semibold text-gray-800">Check Surgery Cost</h3>
+                  <h3 className="text-xl font-semibold text-gray-800">Connect With Aapka Care</h3>
                   <button
                     onClick={closeDialog}
                     className="text-red-500 hover:text-red-700"
@@ -475,7 +539,7 @@ const KidneyStoneAdsPage = () => {
             </div>
           </section>
 
-          <section>
+          <section className='mb-20'>
             <h2 className="text-xl font-semibold mb-2">Frequently Asked Questions</h2>
             <ul className="space-y-2">
               {faqs.map((faq, idx) => (
@@ -503,6 +567,7 @@ const KidneyStoneAdsPage = () => {
               ))}
             </ul>
           </section>
+          
 
           <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
             <div className="flex gap-4">
