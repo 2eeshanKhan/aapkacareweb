@@ -1,565 +1,647 @@
 'use client';
-
-import { useForm } from 'react-hook-form';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck,faChevronDown  } from '@fortawesome/free-solid-svg-icons'; 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+import { PhoneCall } from 'lucide-react';
+import { useState } from 'react';
 import { getFirestore, doc, setDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { db } from "@/module/firebaseConfig";
+import { FaWhatsapp, FaCheckCircle, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
+import { MdMedicalServices, MdMonitorHeart, MdContactPhone } from "react-icons/md";
+import { GiLaserPrecision } from "react-icons/gi";
 
-
-
-
-export default function LasikBooking() {
-    const {
-        register: registerForm1,
-        handleSubmit: handleSubmitForm1,
-        formState: { errors: errorsForm1 },
-      } = useForm();
-    
-      const {
-        register: registerForm2,
-        handleSubmit: handleSubmitForm2,
-        formState: { errors: errorsForm2 },
-      } = useForm();
-    
-      const onSubmitForm1 = async (data) => {
-        const currentYear = new Date().getFullYear();
-        const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
-        const yearMonth = `${currentYear}${currentMonth}`;
-      
-        // Create document ID as the current year
-        const docRef = doc(db, 'AllLasik', currentYear.toString());
-      
-        // Set the subcollection (e.g., 202504 for April 2025)
-        const subcollectionRef = collection(docRef, yearMonth);
-      
-        // Create a server timestamp and convert it to a string
-        const timestamp = new Date().toISOString(); // Converts timestamp to string in ISO format
-      
-        // Save the data
-        try {
-          await setDoc(doc(subcollectionRef, timestamp), {
-            name: data.name,
-            phone: data.mobile,
-            insurance: data.insurance,
-            createdAt: serverTimestamp(), // Store Firebase server timestamp
-          });
-          console.log('Document successfully written!');
-        } catch (e) {
-          console.error('Error adding document: ', e);
-        }
-      
-        console.log('Form 1:', data);
-        alert(`Thank you, ${data.name}! We will contact you shortly.`);
-      };
-      
-    
-      const onSubmitForm2 = async(data) => {
-        const currentYear = new Date().getFullYear();
-        const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
-        const yearMonth = `${currentYear}${currentMonth}`;
-      
-        // Create document ID as the current year
-        const docRef = doc(db, 'AllLasik', currentYear.toString());
-      
-        // Set the subcollection (e.g., 202504 for April 2025)
-        const subcollectionRef = collection(docRef, yearMonth);
-      
-        // Create a server timestamp and convert it to a string
-        const timestamp = new Date().toISOString(); // Converts timestamp to string in ISO format
-      
-        // Save the data
-        try {
-          await setDoc(doc(subcollectionRef, timestamp), {
-            name: data.name,
-            phone: data.mobile,
-            insurance: data.insurance,
-            createdAt: serverTimestamp(), // Store Firebase server timestamp
-          });
-          console.log('Document successfully written!');
-        } catch (e) {
-          console.error('Error adding document: ', e);
-        }
-        console.log('Form 2:', data);
-        alert(`Thank you, ${data.name}! We will contact you shortly.`);
-      };
-  const faqData = [
-    {
-      question: 'Am I eligible for LASIK/Contoura vision treatment?',
-      answer: 'Generally, a suitable candidate will be at least 18 years of age, have had a stable vision for the last 12 months, is not pregnant, is free of certain diseases of the cornea and retina and is generally in good health.'
-    },
-    {
-      question: 'Is LASIK surgery painful?',
-      answer: 'Not at all. It is a bladeless, stitchless, and painless procedure that takes just about 20 minutes.'
-    },
-    {
-        question: 'Is the procedure safe?',
-        answer: 'LASIK is considered to be very safe. Over 10 million cases have been performed worldwide in the last decade.'
-      },
-      {
-        question: 'Will my vision be corrected forever?',
-        answer: 'Once the cornea has been modified it tends to stay modified permanently. The vast majority of corrected eyes remain stable, permanently correcting near-sightedness, far-sightedness and astigmatism.'
-      },
-      {
-        question: 'How will I know which treatment is best for me ?',
-        answer: 'Your surgeon will advise this after a thorough examination at a consultation.'
-      },
-    {
-      question: 'How soon can I get back to normal, drive, play sport or go to work?',
-      answer: 'Most people return to work and drive the day after lasik surgery.'
-    },
-    {
-        question: 'Are Aapka Care Ophthalmologists Reliable?',
-        answer: 'Yes, ophthalmologists at Aapka Care are highly reliable. They come with years of experience of treating different eye problems for men and women of all age groups.'
-      }
-  ];
-  const advantages = [
-    { label: 'Stitches', micro: 'NO STITCHES', femto: 'NO STITCHES' },
-    { label: 'Precision', micro: 'PRECISE', femto: 'MORE PRECISE' },
-    { label: 'Incision', micro: '1.5-1.8 MM', femto: '1.5-1.8 MM' },
-    { label: 'Technique', micro: 'MANUAL', femto: 'BLADE FREE' },
-    { label: 'Healing', micro: 'QUICK HEALING', femto: 'QUICK HEALING' },
-    { label: 'Safety', micro: 'SAFER', femto: 'MORE SAFER' },
-    { label: 'Accuracy', micro: 'ACCURATE', femto: 'MORE ACCURATE' },
-  ];
+const LasikBooking = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', mobile: '', insurance: '' });
+  const [formErrors, setFormErrors] = useState({ name: '', mobile: '', insurance: '' });
 
-  const toggleAnswer = (index) => {
+  const faqs = [
+    {
+      question: "What is LASIK surgery?",
+      answer: "LASIK is a laser eye surgery to correct vision problems like myopia, hyperopia & astigmatism."
+    },
+    {
+      question: "Is LASIK safe and painless?",
+      answer: "Yes! LASIK is bladeless, fast, and almost pain-free with high success rates"
+    },
+    {
+      question: "Am I eligible for LASIK?",
+      answer: "Most adults aged 18–45 with stable vision are eligible. Our doctors will confirm after a free test."
+    },
+    {
+      question: "Is LASIK permanent?",
+      answer: "Yes, for most patients LASIK gives long-term or permanent vision correction."
+    },
+    {
+      question: "How soon can I return to work after LASIK?",
+      answer: "Most people resume normal work in just 1–2 days."
+    },
+  ];
+
+  const features = [
+    {
+      icon: <GiLaserPrecision className="text-3xl text-green-700" />,
+      title: "Type of",
+      subtitle: "Procedure",
+    },
+    {
+      icon: <MdMonitorHeart className="text-3xl text-green-700" />,
+      title: "Severity of",
+      subtitle: "the Disease",
+    },
+    {
+      icon: <MdMedicalServices className="text-3xl text-green-700" />,
+      title: "Past Medical",
+      subtitle: "Condition",
+    },
+    {
+      icon: <MdContactPhone className="text-3xl text-green-700" />,
+      title: "Contact",
+      subtitle: "for exact cost",
+    },
+  ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // Handle both 'insurance' and 'dialog-insurance' as the same field
+    const fieldName = name === 'dialog-insurance' ? 'insurance' : name;
+    setFormData((prev) => ({ ...prev, [fieldName]: value }));
+    setFormErrors((prev) => ({ ...prev, [fieldName]: '' }));
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    if (!formData.name.trim()) {
+      errors.name = 'Patient name is required';
+    }
+    if (!formData.mobile.trim()) {
+      errors.mobile = 'Mobile number is required';
+    } else if (!/^[0-9]{10}$/.test(formData.mobile)) {
+      errors.mobile = 'Enter a valid 10-digit number';
+    }
+    if (!formData.insurance) {
+      errors.insurance = 'Please select insurance status';
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (validateForm()) {
+      const currentYear = new Date().getFullYear();
+      const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+      const yearMonth = `${currentYear}${currentMonth}`;
+      const docRef = doc(db, 'AllLasik', currentYear.toString());
+      const subcollectionRef = collection(docRef, yearMonth);
+      const timestamp = new Date().toISOString();
+
+      try {
+        await setDoc(doc(subcollectionRef, timestamp), {
+          name: formData.name,
+          phone: formData.mobile,
+          insurance: formData.insurance,
+          createdAt: serverTimestamp(),
+        });
+        console.log('Document successfully written!');
+        alert(`Thank you, ${formData.name}! We will contact you shortly.`);
+        setFormData({ name: '', mobile: '', insurance: '' });
+        setFormErrors({ name: '', mobile: '', insurance: '' });
+        setIsDialogOpen(false);
+      } catch (e) {
+        console.error('Error adding document: ', e);
+        alert('Failed to submit the form. Please try again.');
+      }
+    }
+  };
+
+  const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const openDialog = () => {
+    setIsDialogOpen(true);
+    setFormData({ name: '', mobile: '', insurance: '' });
+    setFormErrors({ name: '', mobile: '', insurance: '' });
+  };
+
+  const closeDialog = () => {
+    setIsDialogOpen(false);
+    setFormData({ name: '', mobile: '', insurance: '' });
+    setFormErrors({ name: '', mobile: '', insurance: '' });
+  };
+
+  // Close dialog with Esc key
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === 'Escape' && isDialogOpen) {
+        closeDialog();
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isDialogOpen]);
 
   return (
-    <main className="min-h-screen bg-white font-sans">
-      {/* Top Header */}
-      <div className="bg-gradient-to-r from-sky-700 to-rose-900 p-4 flex justify-between items-center text-white shadow-md">
-        <h1 className="text-2xl font-bold tracking-wide">Aapka Care</h1>
-        <a
-          href="tel:9821527088"
-          className="bg-white text-sky-700 px-4 py-1 rounded-full font-medium hover:bg-sky-100 transition"
-        >
-          📞 9821527088
-        </a>
-      </div>
-
-      {/* Hero Section */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-20 py-16 items-center">
-        {/* Left Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
-            Say Goodbye to Glasses with <span className="text-sky-600">Advanced Lasik</span>
-          </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Get expert care with <strong className="text-gray-800">zero hassle</strong>
-          </p>
-
-          <ul className="mt-6 space-y-3 text-md text-gray-700 font-medium">
-            <li>✅ Only 15 Mins Procedure</li>
-            <li>🚗 Same Day Discharge</li>
-            <li>💳 No Cost EMI Available</li>
-            <li>🏥 NABH-Accredited Partner Hospitals</li>
-          </ul>
-
-          <a href="tel:+919821527088">
-          <button className="mt-8 bg-gradient-to-r from-purple-500 via-indigo-600 to-blue-700 hover:from-purple-600 hover:to-indigo-700 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-pink-400 focus:ring-opacity-50 animate-pulse">
-  📞 Call Now for Cost Estimate
-</button>
-
-
-</a>
-        </motion.div>
-
-        {/* Form Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
-        >
-          <h3 className="text-2xl font-bold mb-6 text-gray-800">
-            Lasik Surgery Cost Calculator
-          </h3>
-
-
-<form onSubmit={handleSubmitForm1(onSubmitForm1)} className="space-y-6">
-            <div>
-              <label htmlFor="name1" className="block text-sm font-medium text-gray-700">Your Name</label>
-              <input
-                id="name1"
-                type="text"
-                placeholder="Enter your full name"
-                {...registerForm1('name', {
-                  required: true,
-                  pattern: /^[a-zA-Z\s]+$/,
-                })}
-                className="w-full px-4 py-3 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
-              />
-              {errorsForm1.name && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errorsForm1.name.type === 'required'
-                    ? 'Name is required.'
-                    : 'Only alphabets are allowed.'}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="mobile1" className="block text-sm font-medium text-gray-700">Mobile Number</label>
-              <input
-                id="mobile1"
-                type="tel"
-                placeholder="Enter your 10-digit mobile number"
-                {...registerForm1('mobile', {
-                  required: true,
-                  pattern: /^[0-9]{10}$/,
-                })}
-                className="w-full px-4 py-3 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
-              />
-              {errorsForm1.mobile && (
-                <p className="text-red-500 text-sm mt-1">Enter a valid 10-digit number.</p>
-              )}
-            </div>
-            <div>
-  <label className="block text-sm font-medium text-gray-700 mb-4">
-    Do you have insurance?
-  </label>
-  <div className="flex gap-6">
-    <label className="flex items-center gap-2">
-      <input
-        type="radio"
-        value="Yes"
-        {...registerForm1('insurance', { required: true })}
-      />
-      Yes
-    </label>
-    <label className="flex items-center gap-2">
-      <input
-        type="radio"
-        value="No"
-        {...registerForm1('insurance', { required: true })}
-      />
-      No
-    </label>
-  </div>
-  {errorsForm1.insurance && (
-    <p className="text-red-500 text-sm mt-1">Please select an option.</p>
-  )}
-</div>
-
-<button
-  type="submit"
-  className="bg-sky-600 hover:bg-sky-700 w-full py-3 rounded-md text-white font-semibold text-lg transition-all shadow-md hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500"
->
-  Get Your Estimate
-</button>
-
-
-           
-          </form>
-
-        </motion.div>
-      </section>
-
-      {/* Footer Stats */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center shadow-inner">
-        <div>
-          <h4 className="text-3xl font-bold">2L+</h4>
-          <p className="text-sm font-medium">Happy Patients</p>
-        </div>
-        <div>
-          <h4 className="text-3xl font-bold">50+</h4>
-          <p className="text-sm font-medium">Treatments</p>
-        </div>
-        <div>
-          <h4 className="text-3xl font-bold">700+</h4>
-          <p className="text-sm font-medium">Hospitals</p>
-        </div>
-        <div>
-          <h4 className="text-3xl font-bold">40+</h4>
-          <p className="text-sm font-medium">Cities Served</p>
-        </div>
-      </div>
-      <section className="py-20 px-6 max-w-6xl mx-auto">
-  <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900 leading-tight">
-    What is the Cost of LASIK Surgery?
-  </h2>
-  <ul className="space-y-8 text-lg text-gray-700">
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-blue-600" />
-      <span className="font-medium text-gray-800">Equipment and Technology (Laser/Contoura) Used</span>
-    </li>
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-green-600" />
-      <span className="font-medium text-gray-800">Eye Vision and Cornea Thickness</span>
-    </li>
-    <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-      <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-orange-600" />
-      <span className="font-medium text-gray-800">Aftercare is an add-on expense — at Aapka Care, we offer free follow-ups</span>
-    </li>
-  </ul>
-</section>
-
-<section className="bg-gradient-to-r from-blue-50 via-blue-200 to-blue-50 py-20 px-6">
-  <div className="max-w-6xl mx-auto text-center">
-    <h2 className="text-4xl font-extrabold mb-12 text-gray-900 leading-tight">
-      Why opt for LASIK Surgery?
-    </h2>
-    <ul className="space-y-8 text-lg text-gray-700">
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-blue-600" />
-        <span className="font-medium text-gray-800">Bladeless, Stitchless, and Painless Treatment</span>
-      </li>
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-green-600" />
-        <span className="font-medium text-gray-800">20-minute procedure, same day discharge</span>
-      </li>
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-orange-600" />
-        <span className="font-medium text-gray-800">Return to work the next day</span>
-      </li>
-      <li className="flex items-center space-x-4 transition-transform duration-300 transform hover:scale-105">
-        <FontAwesomeIcon icon={faCheck} className="w-8 h-8 text-purple-600" />
-        <span className="font-medium text-gray-800">Restores clear vision</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-
-     
-<section className="py-24 px-6 bg-gradient-to-r from-gray-300 via-sky-200 to-sky-300">
-  <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-    {/* Left Section: Text */}
-    <div className="text-center lg:text-left">
-      <h2 className="text-4xl font-bold text-gray-900 mb-6">
-        LASIK Cost Calculator
-      </h2>
-      <p className="text-lg text-gray-600 mb-6">
-        Get an estimate for your LASIK surgery cost by filling out the form on the right. It's simple, quick, and secure!
-      </p>
-    </div>
-    
-   
-
-    {/* Second Form: Another Booking or Contact Form */}
-<section className="px-6 md:px-20 py-16 bg-gray-100">
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    className="bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto"
-  >
-    <h3 className="text-2xl font-bold mb-6 text-gray-800">
-      Book a Free LASIK Consultation
-    </h3>
-    <form onSubmit={handleSubmitForm2(onSubmitForm2)} className="space-y-4 max-w-lg">
-          <input
-            type="text"
-            placeholder="Your Name"
-            {...registerForm2('name', {
-              required: true,
-              pattern: /^[a-zA-Z\s]+$/,
-            })}
-            className="w-full px-4 py-3 rounded-md border border-gray-300"
-          />
-          {errorsForm2.name && (
-            <p className="text-red-500 text-sm">Name is required and should contain only letters.</p>
-          )}
-
-          <input
-            type="tel"
-            placeholder="Mobile Number"
-            {...registerForm2('mobile', {
-              required: true,
-              pattern: /^[0-9]{10}$/,
-            })}
-            className="w-full px-4 py-3 rounded-md border border-gray-300"
-          />
-          {errorsForm2.mobile && (
-            <p className="text-red-500 text-sm">Valid 10-digit number required.</p>
-          )}
-          <div>
-  <label className="block text-sm font-medium text-gray-700 mb-4">
-    Do you have insurance?
-  </label>
-  <div className="flex gap-6">
-    <label className="flex items-center gap-2">
-      <input
-        type="radio"
-        value="Yes"
-        {...registerForm2('insurance', { required: true })}
-      />
-      Yes
-    </label>
-    <label className="flex items-center gap-2">
-      <input
-        type="radio"
-        value="No"
-        {...registerForm2('insurance', { required: true })}
-      />
-      No
-    </label>
-  </div>
-  {errorsForm2.insurance && (
-    <p className="text-red-500 text-sm mt-1">Please select an option.</p>
-  )}
-</div>
-
-<button
-  type="submit"
-  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md shadow-lg"
->
-  Submit
-</button>
-</form>
-</motion.div>
-</section>
-</div>
-</section>
-<section className="bg-gradient-to-r from-sky-500 to-sky-700 py-16 px-6">
-  <div className="max-w-6xl mx-auto text-center text-white">
-    <h2 className="text-4xl font-bold mb-8 tracking-tight">Why Choose Aapka Care?</h2>
-    <ul className="space-y-6 text-lg">
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium">5+ Years Experienced Doctors</span>
-      </li>
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium">Latest Technology & Equipment</span>
-      </li>
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium">No-Cost EMI Option</span>
-      </li>
-      <li className="flex items-center justify-center space-x-3">
-        <span className="text-xl text-yellow-400">✔</span>
-        <span className="font-medium">Complete Paperwork Support by Our Team</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-
-<section className="py-16 px-6 bg-gray-100">
-  <div className="max-w-6xl mx-auto text-center">
-    <h2 className="text-4xl font-semibold text-center mb-8 text-gray-900">Choose The Right Treatment</h2>
-
-    <div className="overflow-x-auto rounded-lg shadow-md">
-      <table className="min-w-full bg-white border text-center">
-        <thead>
-          <tr className="bg-blue-100 text-gray-800">
-            <th className="p-5 border font-semibold text-lg">Technology</th>
-            <th className="p-5 border font-semibold text-lg">LASIK</th>
-            <th className="p-5 border font-semibold text-lg">SMILE</th>
-            <th className="p-5 border font-semibold text-lg">SILK</th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-700">
-          <tr>
-            <td className="p-5 border">Advanced LASIK</td>
-            <td className="p-5 border">Established</td>
-            <td className="p-5 border">Latest, Robotic, AI-driven</td>
-            <td className="p-5 border">Femtosecond LASER</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
- 
-
-<section className="py-10 px-6 max-w-xl mx-auto">
-        <div className="flex flex-col sm:flex-row justify-center gap-6 mt-10">
-          <a href="tel:9821527088">
-            <button className="bg-orange-500 text-white py-4 px-8 rounded-lg hover:bg-orange-600 transition">
-              Talk to Our Expert
-            </button>
+    <div className="relative bg-gradient-to-b from-blue-50 to-white min-h-screen">
+      <div className="w-full bg-gray-50 px-4 sm:px-8 md:px-20 py-4 flex flex-wrap justify-between items-center z-50">
+        <Image
+          src="/images/bluelogo.png"
+          alt="Aapka Care Icon"
+          width={190}
+          height={60}
+          className="mb-2 sm:mb-0"
+        />
+        <div className="hidden sm:flex gap-4 items-center">
+          <a
+            href="tel:9821527088"
+            className="bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
+          >
+            <PhoneCall className="w-4 h-4 mr-2" />
+            Call 9821527088
           </a>
-          <a href="tel:9821527088">
-            <button className="bg-blue-600 text-white py-4 px-8 rounded-lg hover:bg-blue-700 transition">
-              Book Appointment Now
-            </button>
+          <a
+            href="https://wa.me/919821527088"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
+          >
+            <FaWhatsapp className="w-4 h-4 mr-2" />
+            Chat with Lasik Expert
           </a>
         </div>
-      </section>
-  </div>
-</section>
+        <div className="flex sm:hidden gap-3">
+          <a href="tel:9821527088" className="bg-red-600 p-2 rounded-full text-white">
+            <PhoneCall className="w-5 h-5" />
+          </a>
+          <a
+            href="https://wa.me/919821527088"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 p-2 rounded-full text-white"
+          >
+            <FaWhatsapp className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
 
-<section className="py-16 px-6 bg-white">
-  <div className="max-w-6xl mx-auto text-center">
-    <h2 className="text-4xl font-semibold mb-8 text-gray-900">Advantages of Bladeless LASIK Surgery</h2>
-    {/* Add table or icons-based list */}
+      <section
+        className="relative mt-0 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between bg-violet-50 md:bg-[url('/images/lasikbanner.png')] bg-cover bg-center bg-no-repeat"
+        style={{ minHeight: '50vh' }}
+      >
+        <div className="text-black max-w-2xl p-4 md:p-10">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-4">
+          Best Safe LASIK Surgery in Mumbai
 
-    <div className="grid gap-6 md:grid-cols-2">
-          {advantages.map((item, index) => (
-            <div key={index} className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">{item.label}</h3>
-              
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div className="flex-1 text-center bg-gray-100 p-3 rounded-lg font-medium">
-                  <p className="text-xs uppercase text-gray-500 mb-1">Micro Incision Surgery</p>
-                  <p className="text-gray-800">{item.micro}</p>
-                </div>
+          </h1>
+          <h1 className="text-xl sm:text-xl md:text-xl font-bold leading-snug mb-4">
+          Bladeless • Painless • Highly Precise • Fast Recovery
 
-                <div className="flex-1 text-center bg-blue-600 p-3 rounded-lg text-white font-medium">
-                  <p className="text-xs uppercase text-white/70 mb-1">Femto Laser Assisted Surgery</p>
-                  <p className="">{item.femto}</p>
-                </div>
-              </div>
-            </div>
+          </h1>
+          {[
+            'Bladeless & 100% Painless Procedure',
+            'High-Precision Laser Technology',
+            'Restores Crystal Clear Vision',
+            'No Cost EMI & Pay Later Option',
+            'Free Consultation & Eye Check-up',
+           ].map((text, idx) => (
+            <p key={idx} className="text-black text-sm sm:text-base mb-2 flex items-start">
+              <FaCheckCircle className="text-green-300 mt-1 mr-2 text-base sm:text-lg md:text-xl" />
+              {text}
+            </p>
           ))}
         </div>
 
+        
 
+        <div className="md:fixed top-[100px] right-4 sm:right-40 z-50 w-[100%] max-w-[320px] mx-auto md:mx-0 md:w-[350px] my-6 md:my-0">
+  <div className="bg-blue-50 shadow-xl rounded-xl p-4 sm:p-6">
+    <h3 className="text-xl sm:text-2xl font-bold text-black mb-4 text-center">Book Free Consultation</h3>
+    <input
+      name="name"
+      type="text"
+      placeholder="Patient Name"
+      value={formData.name}
+      onChange={handleChange}
+      className="border w-full mb-1 px-3 py-2 rounded focus:outline-none text-sm sm:text-base"
+      aria-label="Patient Name"
+    />
+    {formErrors.name && <p className="text-red-500 text-xs sm:text-sm mb-2">{formErrors.name}</p>}
+    <input
+      name="mobile"
+      type="text"
+      placeholder="+91 Mobile Number"
+      value={formData.mobile}
+      onChange={handleChange}
+      className="border w-full mb-1 px-3 py-2 rounded focus:outline-none text-sm sm:text-base"
+      aria-label="Mobile Number"
+    />
+    {formErrors.mobile && <p className="text-red-500 text-xs sm:text-sm mb-2">{formErrors.mobile}</p>}
+    <div className="mb-4">
+      <p className="font-medium text-gray-800 mb-2 text-sm sm:text-base">Do you have insurance?</p>
+      <div className="flex gap-4">
+        <label className="flex items-center gap-1 text-gray-700 text-sm sm:text-base">
+          <input
+            type="radio"
+            name="insurance"
+            value="yes"
+            checked={formData.insurance === 'yes'}
+            onChange={handleChange}
+            className="accent-red-500"
+            aria-label="Insurance Yes"
+          />
+          Yes
+        </label>
+        <label className="flex items-center gap-1 text-gray-700 text-sm sm:text-base">
+          <input
+            type="radio"
+            name="insurance"
+            value="no"
+            checked={formData.insurance === 'no'}
+            onChange={handleChange}
+            className="accent-red-500"
+            aria-label="Insurance No"
+          />
+          No
+        </label>
+      </div>
+      {formErrors.insurance && <p className="text-red-500 text-xs sm:text-sm mt-1">{formErrors.insurance}</p>}
     </div>
-</section>
+    <button
+      onClick={handleSubmit}
+      className="w-full bg-blue-400 hover:bg-blue-500 text-white py-2 rounded-full font-semibold text-sm sm:text-base"
+      aria-label="Book Consultation"
+    >
+      BOOK NOW
+    </button>
+  </div>
+</div>
+      </section>
 
-<section className="py-20 px-6 max-w-6xl mx-auto">
-        <h2 className="text-4xl font-extrabold text-center mb-12 text-gray-900 leading-tight">
-          Frequently Asked Questions
-        </h2>
-        <div className="space-y-6">
-          {faqData.map((faq, index) => (
-            <div
-              key={index}
-              className="border border-gray-300 rounded-xl p-4 bg-white shadow-sm cursor-pointer"
-              onClick={() => toggleAnswer(index)}
-            >
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {faq.question}
-                </h3>
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className={`transition-transform duration-300 ${
-                    openIndex === index ? 'rotate-180' : ''
-                  }`}
+      <div className="flex px-4 md:px-10 mt-10 gap-4">
+        <div className="w-full md:w-[60%] space-y-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 bg-white shadow-md rounded-xl divide-y sm:divide-y-0 sm:divide-x divide-green-600">
+            <div className="text-center py-4">
+              <h2 className="text-3xl font-bold text-green-600">100+</h2>
+              <p className="text-sm">JCI & NABH Hospitals</p>
+            </div>
+            <div className="text-center py-4">
+              <h2 className="text-3xl font-bold text-green-600">1,500+</h2>
+              <p className="text-sm">Expert Doctors</p>
+            </div>
+            <div className="text-center py-4">
+              <h2 className="text-3xl font-bold text-green-600">8,000+</h2>
+              <p className="text-sm">Happy Patients</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center md:items-start justify-between bg-orange-50 rounded-2xl p-4 md:p-8 shadow-md space-y-4 md:space-y-0">
+            <div className="text-center md:text-left flex-1">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800">
+                Check <span className="text-orange-600">Surgery Cost</span>
+              </h3>
+              <p className="mt-2 text-gray-700 text-sm md:text-base max-w-md mx-auto md:mx-0">
+                Find the total cost of surgery at top-rated hospitals in your city with transparent and affordable pricing.
+              </p>
+              <button
+                onClick={openDialog}
+                className="mt-4 bg-orange-600 hover:bg-orange-700 transition-colors text-white px-5 py-2.5 rounded-full font-medium text-sm md:text-base shadow"
+                aria-label="Calculate Surgery Cost"
+              >
+                Calculate Surgery Cost
+              </button>
+            </div>
+            <div className="w-40 sm:w-48 md:w-60">
+              <img
+                src="/images/kidneysurgery.png"
+                alt="Surgery Illustration"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
+          {isDialogOpen && (
+            <div className="fixed inset-0 flex justify-center items-center z-50">
+              <div
+                className="fixed inset-0 backdrop-blur-sm  bg-opacity-40"
+                onClick={closeDialog}
+                aria-hidden="true"
+              ></div>
+              <div className="bg-white p-6 rounded-xl shadow-xl w-[90%] max-w-md z-50">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-semibold text-gray-800">Connect With Aapka Care</h3>
+                  <button
+                    onClick={closeDialog}
+                    className="text-red-500 hover:text-red-700"
+                    aria-label="Close Dialog"
+                  >
+                    <FaTimes className="w-5 h-5" />
+                  </button>
+                </div>
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Patient Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="border w-full mb-1 px-4 py-2 rounded focus:outline-none"
+                  aria-label="Patient Name"
                 />
+                {formErrors.name && <p className="text-red-500 text-sm mb-2">{formErrors.name}</p>}
+                <input
+                  name="mobile"
+                  type="text"
+                  placeholder="+91 Mobile Number"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  className="border w-full mb-1 px-4 py-2 rounded focus:outline-none"
+                  aria-label="Mobile Number"
+                />
+                {formErrors.mobile && <p className="text-red-500 text-sm mb-2">{formErrors.mobile}</p>}
+                <div className="mb-4">
+                  <p className="font-medium text-gray-800 mb-2">Do you have insurance?</p>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-1 text-gray-700">
+                      <input
+                        type="radio"
+                        name="dialog-insurance"
+                        value="yes"
+                        checked={formData.insurance === 'yes'}
+                        onChange={handleChange}
+                        className="accent-red-500"
+                        aria-label="Insurance Yes"
+                      />
+                      Yes
+                    </label>
+                    <label className="flex items-center gap-1 text-gray-700">
+                      <input
+                        type="radio"
+                        name="dialog-insurance"
+                        value="no"
+                        checked={formData.insurance === 'no'}
+                        onChange={handleChange}
+                        className="accent-red-500"
+                        aria-label="Insurance No"
+                      />
+                      No
+                    </label>
+                  </div>
+                  {formErrors.insurance && <p className="text-red-500 text-sm mt-1">{formErrors.insurance}</p>}
+                </div>
+                <button
+                  onClick={handleSubmit}
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 rounded-full font-semibold"
+                  aria-label="Submit Form"
+                >
+                  SUBMIT
+                </button>
               </div>
-              {openIndex === index && (
-                <p className="mt-3 text-gray-700 text-base leading-relaxed">
-                  {faq.answer}
-                </p>
-              )}
             </div>
-          ))}
+          )}
+
+          <section className="max-w-5xl mx-auto px-4 py-8">
+            <h2 className="text-2xl font-bold text-sky-800 mb-6 text-center">
+            Top LASIK Specialists in Mumbai
+
+            </h2>
+            <div className="space-y-6">
+  {[
+    {
+      name: "Dr. Jatin Ashar",
+      title: "MD(AIIMS), DNB, FICO(UK), FAICO(CORNEA), FLVPEI(CORNEA)",
+      specialization: "Ophthalmologist / Eye Surgeon",
+      experience: "21+ Years Experience",
+      rating: "100%",
+      img: "/images/jatinashar.png",
+    },
+  ].map((doc, idx) => (
+    <div
+      key={idx}
+      className="bg-gradient-to-br from-sky-300 via-sky-200 to-sky-300 p-[2px] rounded-2xl shadow-xl"
+    >
+      <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-6 border border-gray-200">
+        {/* Image */}
+        <div className="flex-shrink-0">
+          <img
+            src={doc.img}
+            alt={doc.name}
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-indigo-100"
+          />
+        </div>
+
+        {/* Info */}
+        <div className="flex flex-col justify-between flex-1 gap-3">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-800">{doc.name}</h3>
+            <p className="text-sm sm:text-base text-gray-600 mt-1">{doc.title}</p>
+            <p className="text-sm text-indigo-600 font-medium mt-1">{doc.specialization}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mt-2">
+            <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-medium rounded-full">
+              📅 {doc.experience}
+            </span>
+            <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 text-xs font-medium rounded-full">
+              👍 {doc.rating} Positive Reviews
+            </span>
+          </div>
+        </div>
+        
+
+        {/* CTA */}
+        <div className="sm:ml-auto sm:self-center">
+          <button
+            onClick={openDialog}
+            className="text-white bg-red-500 hover:bg-red-600 transition-all duration-200 px-6 py-3 rounded-full text-sm sm:text-base font-semibold shadow-md"
+            aria-label={`Book consultation with ${doc.name}`}
+          >
+            Book Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+          </section>
+
+          <div className="bg-white px-4 py-10 text-center">
+      <h2 className="text-2xl md:text-3xl font-bold mb-10">
+        LASIK Surgery Cost in Mumbai Depends On:
+      </h2>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+        {features.map((item, idx) => (
+          <div key={idx} className="flex flex-col items-center space-y-2">
+            <div className="bg-green-100 p-6 rounded-full">{item.icon}</div>
+            <p className="font-semibold text-gray-800">{item.title}</p>
+            <p className="text-sm text-gray-600">{item.subtitle}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-10 flex justify-center">
+      <a
+            href="https://wa.me/919821527088"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
+          >
+            <FaWhatsapp className="w-4 h-4 mr-2" />
+            Chat with Expert
+          </a>
+      </div>
+    </div>
+
+    <div className="flex flex-col md:flex-row items-center md:items-start justify-between bg-amber-50 rounded-2xl p-4 md:p-8 shadow-md space-y-4 md:space-y-0">
+            <div className="text-center md:text-left flex-1">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-800">
+                Check <span className="text-orange-600">Insurance Coverage</span>
+              </h3>
+              <p className="mt-2 text-gray-700 text-sm md:text-base max-w-md mx-auto md:mx-0">
+                Find out if this treatment is covered in your insurance policy or not
+              </p>
+              <button
+                onClick={openDialog}
+                className="mt-4 bg-orange-600 hover:bg-orange-700 transition-colors text-white px-5 py-2.5 rounded-full font-medium text-sm md:text-base shadow"
+                aria-label="Calculate Surgery Cost"
+              >
+                Check Insurance Coverage
+              </button>
+            </div>
+            <div className="w-40 sm:w-48 md:w-60">
+              <img
+                src="/images/kidneysurgery.png"
+                alt="Surgery Illustration"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
+         
+
+          <section className="bg-green-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out mt-6">
+            <h2 className="text-xl font-semibold mb-4 text-green-800">Why Choose Aapka Care?</h2>
+            <ul className="list-disc ml-6 text-green-700 space-y-2">
+              <li>Experienced & Verified Eye Surgeons</li>
+              <li>Partnered with Top NABH & JCI Hospitals</li>
+              <li>Dedicated Personal Care Manager</li>
+              <li>100% Assistance for Insurance & EMI</li>
+              <li>Transparent Pricing — No Hidden Costs</li>
+            </ul>
+          </section>
+
+         
+          <section className="text-center max-w-3xl mx-auto space-y-6">
+        <h1 className="text-4xl font-bold text-blue-700">
+          Life After LASIK – Freedom in Every Blink
+        </h1>
+        <p className="text-lg">
+          No more foggy glasses, expensive lenses, or daily discomfort.
+        </p>
+        <p className="text-lg">
+          Live freely with a clear vision, whether driving, swimming, or traveling.
+        </p>
+        <p className="text-xl font-semibold text-green-600">
+          See the world without limits — thanks to LASIK!
+        </p>
+      </section>
+
+      {/* Testimonial Section */}
+      <section className="mt-16 text-center">
+        <h2 className="text-2xl font-semibold text-gray-700">What Our Patients Say</h2>
+        <div className="flex flex-col items-center mt-4 space-y-2">
+          <div className="text-yellow-500 text-3xl">⭐⭐⭐⭐⭐</div>
+          <div className="text-xl font-medium">4.8/5 Ratings from 3024+ Reviews</div>
+          <div className="text-sm text-gray-500">(Real Stories • Verified Results)</div>
         </div>
       </section>
 
+          <section className='mb-20'>
+            <h2 className="text-xl font-semibold mb-2">Frequently Asked Questions</h2>
+            <ul className="space-y-2">
+              {faqs.map((faq, idx) => (
+                <li
+                  key={idx}
+                  className="bg-white p-3 rounded-lg shadow border border-gray-100"
+                >
+                  <button
+                    className="w-full text-left font-medium text-gray-800 flex items-center justify-between"
+                    onClick={() => handleToggle(idx)}
+                    aria-expanded={openIndex === idx}
+                    aria-controls={`faq-answer-${idx}`}
+                  >
+                    <span>{faq.question}</span>
+                    <span className="text-gray-500">
+                      {openIndex === idx ? <FaChevronUp /> : <FaChevronDown />}
+                    </span>
+                  </button>
+                  {openIndex === idx && (
+                    <p id={`faq-answer-${idx}`} className="text-sm text-gray-600 mt-2">
+                      {faq.answer}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+          <footer className="hidden lg:block bg-black mt-16 px-4 py-8 mb-20 md:mb-2">
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        {/* Heading */}
+        <h3 className="text-lg font-semibold text-white mb-4">Need help?</h3>
 
-<footer className="py-8 bg-blue-900 text-white text-center text-sm">
-  &copy; 2025 Aapka Care. All rights reserved.
-</footer>
+        {/* Buttons */}
+        <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+          <a
+            href="tel:+919821527088"
+            className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm hover:bg-blue-700 transition"
+          >
+            📞 Call Now
+          </a>
+          <button
+             onClick={openDialog}
+            className="bg-green-600 text-white px-6 py-2 rounded-full text-sm hover:bg-green-700 transition"
+          >
+            🔁 Request Call Back
+          </button>
+        </div>
 
+        {/* Copyright */}
+        <p className="text-xs text-white text-center">
+          © {new Date().getFullYear()} All Rights Reserved by Aapka Care (A Unit of Fuerte Health Care Private Limited)
 
+        </p>
+      </div>
+    </footer>
+          
 
-    </main>
+          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
+            <div className="flex gap-4">
+              <a
+                href="tel:9821527088"
+                className="flex-1 bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
+                aria-label="Call Expert"
+              >
+                <PhoneCall className="w-4 h-4 mr-2" />
+                Call Expert
+              </a>
+              <a
+                href="https://wa.me/919821527088"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
+                aria-label="WhatsApp Chat"
+              >
+                <FaWhatsapp className="w-4 h-4 mr-2" />
+                Whatsapp
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="hidden md:block md:w-[40%]"></div>
+      </div>
+    </div>
   );
-}
+};
+
+export default LasikBooking;
