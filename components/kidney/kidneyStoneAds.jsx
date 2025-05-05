@@ -515,7 +515,7 @@ const KidneyStoneAdsPage = () => {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold mb-2">Kidney Stones Treatment Options</h2>
+            <h2 className="text-xl font-semibold mb-2 sm:mb-5">Kidney Stone Treatment Quick Guide</h2>
             <div className="w-full max-w-5xl mx-auto">
               <img
                 src="/images/ad1.png"
@@ -526,9 +526,9 @@ const KidneyStoneAdsPage = () => {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold mb-2">
-              Benefits of <span className="text-indigo-600">Aapka Care’s</span> Treatment for{' '}
-              <span className="text-blue-600">Kidney Stones</span>
+            <h2 className="text-xl font-semibold mb-2 sm:mb-5">
+            Why choose <span className="text-indigo-600"> Aapka Care </span> For{' '}
+              <span className="text-black">Kidney Stone Treatment?</span>
             </h2>
             <div className="w-full flex justify-center">
               <img
