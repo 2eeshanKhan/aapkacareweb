@@ -39,7 +39,7 @@ const KidneyStoneAdsPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Handle both 'insurance' and 'dialog-insurance' as the same field
+    
     const fieldName = name === 'dialog-insurance' ? 'insurance' : name;
     setFormData((prev) => ({ ...prev, [fieldName]: value }));
     setFormErrors((prev) => ({ ...prev, [fieldName]: '' }));
