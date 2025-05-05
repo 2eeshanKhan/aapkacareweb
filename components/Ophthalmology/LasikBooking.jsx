@@ -10,7 +10,11 @@ import { FaWhatsapp, FaCheckCircle, FaChevronDown, FaChevronUp, FaTimes } from '
 import { MdMedicalServices, MdMonitorHeart, MdContactPhone } from "react-icons/md";
 import { GiLaserPrecision } from "react-icons/gi";
 
+
+
+
 const LasikBooking = () => {
+
   const [openIndex, setOpenIndex] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', mobile: '', insurance: '' });
@@ -103,7 +107,6 @@ const LasikBooking = () => {
           insurance: formData.insurance,
           createdAt: serverTimestamp(),
         });
-        console.log('Document successfully written!');
         alert(`Thank you, ${formData.name}! We will contact you shortly.`);
         setFormData({ name: '', mobile: '', insurance: '' });
         setFormErrors({ name: '', mobile: '', insurance: '' });
@@ -144,46 +147,49 @@ const LasikBooking = () => {
 
   return (
     <div className="relative bg-gradient-to-b from-blue-50 to-white min-h-screen">
-      <div className="w-full bg-gray-50 px-4 sm:px-8 md:px-20 py-4 flex flex-wrap justify-between items-center z-50">
-        <Image
-          src="/images/bluelogo.png"
-          alt="Aapka Care Icon"
-          width={190}
-          height={60}
-          className="mb-2 sm:mb-0"
-        />
-        <div className="hidden sm:flex gap-4 items-center">
-          <a
-            href="tel:9821527088"
-            className="bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
-          >
-            <PhoneCall className="w-4 h-4 mr-2" />
-            Call 9821527088
-          </a>
-          <a
-            href="https://wa.me/919821527088"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
-          >
-            <FaWhatsapp className="w-4 h-4 mr-2" />
-            Chat with Lasik Expert
-          </a>
-        </div>
-        <div className="flex sm:hidden gap-3">
-          <a href="tel:9821527088" className="bg-red-600 p-2 rounded-full text-white">
-            <PhoneCall className="w-5 h-5" />
-          </a>
-          <a
-            href="https://wa.me/919821527088"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-green-600 p-2 rounded-full text-white"
-          >
-            <FaWhatsapp className="w-5 h-5" />
-          </a>
-        </div>
-      </div>
+       <div className="w-full bg-gray-50 px-4 sm:px-8 md:px-20 py-4 flex flex-wrap justify-between items-center z-50">
+              <Image
+                src="/images/bluelogo.png"
+                alt="Aapka Care Icon"
+                width={190}
+                height={60}
+                className="mb-2 sm:mb-0"
+              />
+              <div className="hidden sm:flex gap-4 items-center">
+                <a
+                  href="tel:9987537993"
+                  className="bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
+                >
+                  <PhoneCall className="w-4 h-4 mr-2" />
+                  Call 9987537993
+                </a>
+                <a
+  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+                  
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
+                >
+                  <FaWhatsapp className="w-4 h-4 mr-2" />
+                  Chat with Lasik Expert
+                </a>
+              </div>
+              <div className="flex sm:hidden gap-3">
+                <a href="tel:9987537993" className="bg-red-600 p-2 rounded-full text-white">
+                  <PhoneCall className="w-5 h-5" />
+                </a>
+                <a
+  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+                  
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-600 p-2 rounded-full text-white"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+      
 
       <section
         className="relative mt-0 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between bg-violet-50 md:bg-[url('/images/lasikbanner.png')] bg-cover bg-center bg-no-repeat"
@@ -482,14 +488,16 @@ const LasikBooking = () => {
 
       <div className="mt-10 flex justify-center">
       <a
-            href="https://wa.me/919821527088"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
-          >
-            <FaWhatsapp className="w-4 h-4 mr-2" />
-            Chat with Expert
-          </a>
+  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
+  aria-label="WhatsApp Chat"
+>
+  <FaWhatsapp className="w-4 h-4 mr-2" />
+  Chat With Expert
+</a>
+
       </div>
     </div>
 
@@ -585,7 +593,36 @@ const LasikBooking = () => {
               ))}
             </ul>
           </section>
-          <footer className="hidden lg:block bg-black mt-16 px-4 py-8 mb-20 md:mb-2">
+          
+          
+
+          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
+            <div className="flex gap-4">
+              <a
+                href="tel:9987537993"
+                className="flex-1 bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
+                aria-label="Call Expert"
+              >
+                <PhoneCall className="w-4 h-4 mr-2" />
+                Call Expert
+              </a>
+              <a
+  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
+  aria-label="WhatsApp Chat"
+>
+  <FaWhatsapp className="w-4 h-4 mr-2" />
+  Whatsapp
+</a>
+
+            </div>
+          </div>
+        </div>
+        <div className="hidden md:block md:w-[40%]"></div>
+      </div>
+      <footer className=" bg-black  sm:mt-1 px-4 py-8 mb-20 md:mb-2">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         {/* Heading */}
         <h3 className="text-lg font-semibold text-white mb-4">Need help?</h3>
@@ -593,16 +630,16 @@ const LasikBooking = () => {
         {/* Buttons */}
         <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
           <a
-            href="tel:+919821527088"
-            className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm hover:bg-blue-700 transition"
+            href="tel:+919987537993"
+            className="bg-amber-500 text-white px-6 py-2 rounded-full text-sm hover:bg-amber-700 transition"
           >
-            📞 Call Now
+            📞 Call For Free Consultation
           </a>
           <button
              onClick={openDialog}
-            className="bg-green-600 text-white px-6 py-2 rounded-full text-sm hover:bg-green-700 transition"
+            className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm hover:bg-blue-700 transition"
           >
-            🔁 Request Call Back
+            🔁 Get a Call back
           </button>
         </div>
 
@@ -613,33 +650,6 @@ const LasikBooking = () => {
         </p>
       </div>
     </footer>
-          
-
-          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
-            <div className="flex gap-4">
-              <a
-                href="tel:9821527088"
-                className="flex-1 bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
-                aria-label="Call Expert"
-              >
-                <PhoneCall className="w-4 h-4 mr-2" />
-                Call Expert
-              </a>
-              <a
-                href="https://wa.me/919821527088"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
-                aria-label="WhatsApp Chat"
-              >
-                <FaWhatsapp className="w-4 h-4 mr-2" />
-                Whatsapp
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="hidden md:block md:w-[40%]"></div>
-      </div>
     </div>
   );
 };

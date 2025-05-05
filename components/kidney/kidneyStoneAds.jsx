@@ -136,7 +136,7 @@ const KidneyStoneAdsPage = () => {
             Call 9821527088
           </a>
           <a
-            href="https://wa.me/919821527088"
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
@@ -150,7 +150,7 @@ const KidneyStoneAdsPage = () => {
             <PhoneCall className="w-5 h-5" />
           </a>
           <a
-            href="https://wa.me/919821527088"
+              href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 p-2 rounded-full text-white"
@@ -518,7 +518,7 @@ const KidneyStoneAdsPage = () => {
             <h2 className="text-xl font-semibold mb-2">Kidney Stones Treatment Options</h2>
             <div className="w-full max-w-5xl mx-auto">
               <img
-                src="/images/kidneyguide.png"
+                src="/images/ad1.png"
                 alt="Kidney Stones Treatment Options"
                 className="w-full h-auto rounded-lg shadow"
               />
@@ -532,7 +532,7 @@ const KidneyStoneAdsPage = () => {
             </h2>
             <div className="w-full flex justify-center">
               <img
-                src="/images/kidneycomparison.png"
+                src="/images/ad2.png"
                 alt="Kidney Stone Treatment Comparison"
                 className="w-full max-w-3xl rounded shadow"
               />
@@ -580,7 +580,7 @@ const KidneyStoneAdsPage = () => {
                 Call Expert
               </a>
               <a
-                href="https://wa.me/919821527088"
+                 href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
@@ -594,6 +594,34 @@ const KidneyStoneAdsPage = () => {
         </div>
         <div className="hidden md:block md:w-[40%]"></div>
       </div>
+      <footer className=" bg-black  sm:mt-1 px-4 py-8 mb-20 md:mb-2">
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        {/* Heading */}
+        <h3 className="text-lg font-semibold text-white mb-4">Need help?</h3>
+
+        {/* Buttons */}
+        <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+          <a
+            href="tel:+919821527088"
+            className="bg-amber-500 text-white px-6 py-2 rounded-full text-sm hover:bg-amber-700 transition"
+          >
+            📞 Call For Free Consultation
+          </a>
+          <button
+             onClick={openDialog}
+            className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm hover:bg-blue-700 transition"
+          >
+            🔁 Get a Call back
+          </button>
+        </div>
+
+        {/* Copyright */}
+        <p className="text-xs text-white text-center">
+          © {new Date().getFullYear()} All Rights Reserved by Aapka Care (A Unit of Fuerte Health Care Private Limited)
+
+        </p>
+      </div>
+    </footer>
     </div>
   );
 };
