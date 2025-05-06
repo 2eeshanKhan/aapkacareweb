@@ -140,7 +140,7 @@ const LipomaSurgeryAdsPage = () => {
             Call 9821527088
           </a>
           <a
-             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Lipoma%20Treatment.%20Please%20send%20me%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
@@ -154,7 +154,8 @@ const LipomaSurgeryAdsPage = () => {
             <PhoneCall className="w-5 h-5" />
           </a>
           <a
-              href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Lipoma%20Treatment.%20Please%20send%20me%20details."
+           
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 p-2 rounded-full text-white"
@@ -502,7 +503,8 @@ const LipomaSurgeryAdsPage = () => {
                 Call Expert
               </a>
               <a
-                 href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Lipoma%20Treatment.%20Please%20send%20me%20details."
+               
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
