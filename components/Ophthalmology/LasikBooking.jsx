@@ -164,7 +164,7 @@ const LasikBooking = () => {
                   Call 9987537993
                 </a>
                 <a
-  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+  href="https://wa.me/919987537993?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
                   
                   target="_blank"
                   rel="noopener noreferrer"
@@ -179,7 +179,7 @@ const LasikBooking = () => {
                   <PhoneCall className="w-5 h-5" />
                 </a>
                 <a
-  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+  href="https://wa.me/919987537993?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
                   
                   target="_blank"
                   rel="noopener noreferrer"
@@ -488,7 +488,7 @@ const LasikBooking = () => {
 
       <div className="mt-10 flex justify-center">
       <a
-  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+  href="https://wa.me/919987537993?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
   target="_blank"
   rel="noopener noreferrer"
   className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
@@ -607,7 +607,7 @@ const LasikBooking = () => {
                 Call Expert
               </a>
               <a
-  href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
+  href="https://wa.me/919987537993?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
   target="_blank"
   rel="noopener noreferrer"
   className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
