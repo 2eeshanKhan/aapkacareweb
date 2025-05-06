@@ -166,7 +166,7 @@ const LipomaSurgeryAdsPage = () => {
       </div>
 
       <section
-        className="relative mt-0 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between bg-slate-200  bg-cover bg-center bg-no-repeat"
+        className="relative mt-0 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between bg-slate-200 md:bg-[url('/images/lipomaads.jpg')] bg-cover bg-center bg-no-repeat"
         style={{ minHeight: '50vh' }}
       >
         <div className="text-black max-w-2xl p-4 md:p-10">
