@@ -71,7 +71,7 @@ const HerniaAdsPage = () => {
       const currentYear = new Date().getFullYear();
       const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
       const yearMonth = `${currentYear}${currentMonth}`;
-      const docRef = doc(db, 'AllLipoma', currentYear.toString());
+      const docRef = doc(db, 'AllHernia', currentYear.toString());
       const subcollectionRef = collection(docRef, yearMonth);
       const timestamp = new Date().toISOString();
 
