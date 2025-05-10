@@ -8,7 +8,7 @@ import { initializeApp } from 'firebase/app';
 import { db } from "@/module/firebaseConfig";
 import { FaWhatsapp, FaCheckCircle, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
 
-const KidneyStoneAdsPage = () => {
+const HerniaAdsPage = () => {
   const [openIndex, setOpenIndex] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', mobile: '', insurance: '' });
@@ -16,25 +16,29 @@ const KidneyStoneAdsPage = () => {
 
   const faqs = [
     {
-      question: "How soon can I resume normal activities after laser kidney stone surgery?",
-      answer: "Most patients return to daily activities within 2–5 days after surgery."
+      question: "What causes a hernia?",
+      answer: "Hernias can result from a combination of muscle weakness and strain, including factors like heavy lifting, obesity, and chronic coughing."
     },
     {
-      question: "Can multiple kidney stones be treated together?",
-      answer: "Advanced laser procedures can remove multiple stones in a single session."
+      question: "Is hernia surgery painful?",
+      answer: " With laparoscopic techniques, the procedure is minimally invasive and associated with less pain and quicker recovery."
     },
     {
-      question: "Will my insurance cover the kidney stone surgery?",
-      answer: "Yes, most insurance plans cover the full or partial cost. We help with complete insurance approval."
+      question: "How long does recovery take?",
+      answer: " Most patients resume daily activities within 2–3 days post-surgery."
     },
     {
-      question: "How much does kidney stone surgery cost in Mumbai?",
-      answer: "With insurance and offers, your out-of-pocket cost can be minimal! Get a free quote now."
+      question: "Is hernia surgery covered by insurance?",
+      answer: "Yes, we offer 100% assistance with all major insurance providers."
     },
     {
-      question: "How do you pass a kidney stone quickly at home?",
-      answer: "Small stones may pass naturally with hydration. For larger stones, medical treatment is required."
+      question: "Can a hernia recur after surgery?",
+      answer: " Recurrence is rare, especially when the surgery is performed by experienced surgeons and followed by proper post-operative care."
     },
+    {
+        question: "Are EMI options available for the surgery?",
+        answer: "Absolutely! We offer Zero-Cost EMI for all eligible patients."
+      },
   ];
 
   const handleChange = (e) => {
@@ -67,7 +71,7 @@ const KidneyStoneAdsPage = () => {
       const currentYear = new Date().getFullYear();
       const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
       const yearMonth = `${currentYear}${currentMonth}`;
-      const docRef = doc(db, 'AllKidney', currentYear.toString());
+      const docRef = doc(db, 'AllLipoma', currentYear.toString());
       const subcollectionRef = collection(docRef, yearMonth);
       const timestamp = new Date().toISOString();
 
@@ -78,7 +82,7 @@ const KidneyStoneAdsPage = () => {
           insurance: formData.insurance,
           createdAt: serverTimestamp(),
         });
-        console.log('Document successfully written!');
+       
         alert(`Thank you, ${formData.name}! We will contact you shortly.`);
         setFormData({ name: '', mobile: '', insurance: '' });
         setFormErrors({ name: '', mobile: '', insurance: '' });
@@ -136,13 +140,13 @@ const KidneyStoneAdsPage = () => {
             Call 9821527088
           </a>
           <a
-             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20me%20details."
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
           >
             <FaWhatsapp className="w-4 h-4 mr-2" />
-            Chat with Kidney Expert
+            Chat with Hernia Expert
           </a>
         </div>
         <div className="flex sm:hidden gap-3">
@@ -150,7 +154,8 @@ const KidneyStoneAdsPage = () => {
             <PhoneCall className="w-5 h-5" />
           </a>
           <a
-              href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20me%20details."
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
+           
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 p-2 rounded-full text-white"
@@ -161,92 +166,27 @@ const KidneyStoneAdsPage = () => {
       </div>
 
       <section
-        className="relative mt-0 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between bg-sky-100 md:bg-[url('/images/kidneybanner.png')] bg-cover bg-center bg-no-repeat"
+        className="relative mt-0 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between bg-slate-200 md:bg-[url('/images/herniabanner.jpg')] bg-cover bg-center bg-no-repeat"
         style={{ minHeight: '50vh' }}
       >
         <div className="text-black max-w-2xl p-4 md:p-10">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-4">
-            Best Affordable Kidney Stone Treatment in Mumbai
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-4 text-sky-800">
+          Advanced Hernia Treatment in Mumbai
           </h1>
           {[
-            'Advanced Laser Surgery',
-            'Quick Recovery | 100% Insurance Support',
-            'Painless Laser Treatment',
-            'Zero Upfront Payment - Pay Later',
-            'Free Pick Up & Drop Facility',
-            '100+ Top JCI & NABH Accredited Hospitals',
-            '500+ Highly Experienced Doctors',
-            '8000+ Satisfied Patients Trust Us',
+            'Latest 3D Laparoscopic Surgery',
+            'Free Doctor Consultation',
+            'Zero Cost EMI',
+            '100% Insurance Assistance',
+           
           ].map((text, idx) => (
             <p key={idx} className="text-black text-sm sm:text-base mb-2 flex items-start">
-              <FaCheckCircle className="text-green-300 mt-1 mr-2 text-base sm:text-lg md:text-xl" />
+              <FaCheckCircle className="text-green-800 mt-1 mr-2 text-base sm:text-lg md:text-xl" />
               {text}
             </p>
           ))}
         </div>
 
-        {/* <div className="hidden md:block fixed top-[100px] right-10 z-50 w-[350px]">
-          <div className="bg-white shadow-xl rounded-xl p-6">
-            <h3 className="text-2xl font-bold text-black mb-4 text-center">Book Free Consultation</h3>
-            <input
-              name="name"
-              type="text"
-              placeholder="Patient Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="border w-full mb-1 px-4 py-2 rounded focus:outline-none"
-              aria-label="Patient Name"
-            />
-            {formErrors.name && <p className="text-red-500 text-sm mb-2">{formErrors.name}</p>}
-            <input
-              name="mobile"
-              type="text"
-              placeholder="+91 Mobile Number"
-              value={formData.mobile}
-              onChange={handleChange}
-              className="border w-full mb-1 px-4 py-2 rounded focus:outline-none"
-              aria-label="Mobile Number"
-            />
-            {formErrors.mobile && <p className="text-red-500 text-sm mb-2">{formErrors.mobile}</p>}
-            <div className="mb-4">
-              <p className="font-medium text-gray-800 mb-2">Do you have insurance?</p>
-              <div className="flex gap-4">
-                <label className="flex items-center gap-1 text-gray-700">
-                  <input
-                    type="radio"
-                    name="insurance"
-                    value="yes"
-                    checked={formData.insurance === 'yes'}
-                    onChange={handleChange}
-                    className="accent-red-500"
-                    aria-label="Insurance Yes"
-                  />
-                  Yes
-                </label>
-                <label className="flex items-center gap-1 text-gray-700">
-                  <input
-                    type="radio"
-                    name="insurance"
-                    value="no"
-                    checked={formData.insurance === 'no'}
-                    onChange={handleChange}
-                    className="accent-red-500"
-                    aria-label="Insurance No"
-                  />
-                  No
-                </label>
-              </div>
-              {formErrors.insurance && <p className="text-red-500 text-sm mt-1">{formErrors.insurance}</p>}
-            </div>
-            <button
-              onClick={handleSubmit}
-              className="w-full bg-red-400 hover:bg-red-500 text-white py-2 rounded-full font-semibold"
-              aria-label="Book Consultation"
-            >
-              BOOK NOW
-            </button>
-          </div>
-        </div> */}
         
 
         <div className="md:fixed top-[100px] right-4 sm:right-10 z-50 w-[85%] max-w-[320px] mx-auto md:mx-0 md:w-[350px] my-6 md:my-0">
@@ -333,10 +273,11 @@ const KidneyStoneAdsPage = () => {
           <div className="flex flex-col md:flex-row items-center md:items-start justify-between bg-orange-50 rounded-2xl p-4 md:p-8 shadow-md space-y-4 md:space-y-0">
             <div className="text-center md:text-left flex-1">
               <h3 className="text-xl md:text-2xl font-bold text-gray-800">
-                Check <span className="text-orange-600">Surgery Cost</span>
+                Check <span className="text-orange-600">Check Surgery Cost</span>
               </h3>
               <p className="mt-2 text-gray-700 text-sm md:text-base max-w-md mx-auto md:mx-0">
-                Find the total cost of surgery at top-rated hospitals in your city with transparent and affordable pricing.
+              Find the total cost of hernia surgery at top-rated hospitals in your city with transparent and affordable pricing.
+
               </p>
               <button
                 onClick={openDialog}
@@ -434,110 +375,35 @@ const KidneyStoneAdsPage = () => {
             </div>
           )}
 
-          <section className="max-w-5xl mx-auto px-4 py-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-              Meet Our Top Urology Experts
-            </h2>
-            <div className="space-y-6">
-              {[
-                {
-                  name: "Dr. Ankit Vyas",
-                  title: "MBBS, MS - General Surgery, MCh - Urology",
-                  experience: "10+ Years Experience",
-                  rating: "100%",
-                  img: "/images/ankit.png",
-                },
-                {
-                  name: "Dr. Shashank Sharma",
-                  title: "MBBS, MS General Surgery, MCh Urology",
-                  experience: "9+ Years Experience",
-                  rating: "99%",
-                  img: "/images/shashank.png",
-                },
-              ].map((doc, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white shadow-md border border-gray-100 rounded-xl p-4 sm:p-6 flex flex-col gap-4 sm:flex-row sm:items-center"
-                >
-                  <div className="flex gap-4 items-center sm:items-start">
-                    <img
-                      src={doc.img}
-                      alt={doc.name}
-                      className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border border-gray-200"
-                    />
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800">{doc.name}</h3>
-                      <p className="text-sm text-gray-600">{doc.title}</p>
-                      <div className="flex flex-wrap gap-2 text-xs sm:text-sm mt-2">
-                        <span className="bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">
-                          📅 {doc.experience}
-                        </span>
-                        <span className="bg-green-50 text-green-700 px-2 py-1 rounded-full">
-                          👍 {doc.rating} Positive Reviews
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="sm:ml-auto sm:self-center">
-                    <button
-                      onClick={openDialog}
-                      className="block text-center border border-red-500 text-red-600 hover:bg-red-50 font-medium px-8 py-4 rounded-full text-sm transition"
-                      aria-label={`Book consultation with ${doc.name}`}
-                    >
-                      Book Free Consultation
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+          
 
           <section className="bg-red-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
-            <h2 className="text-xl font-semibold mb-4 text-red-700">Risks of Delay in Kidney Stones Treatment</h2>
+            <h2 className="text-xl font-semibold mb-4 text-red-700">Risks of Delaying Hernia Treatment</h2>
             <ul className="list-disc ml-6 text-red-600 space-y-2">
-              <li>Severe Urinary Retention</li>
-              <li>Irreversible Kidney Damage</li>
-              <li>Frequent Urinary Infections</li>
-              <li>Obstruction in the Urinary Tract</li>
-              <li>Complete Loss of Kidney Function</li>
+              <li>Increase in size and pain</li>
+              <li>Risk of strangulated hernia (cutting off blood supply)</li>
+              <li>Digestive discomfort and restricted mobility</li>
+              <li>Potential for emergency surgery, which carries more risks
+              </li>
+             
             </ul>
           </section>
 
           <section className="bg-green-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out mt-6">
             <h2 className="text-xl font-semibold mb-4 text-green-800">Why Choose Aapka Care?</h2>
             <ul className="list-disc ml-6 text-green-700 space-y-2">
-              <li>Highly Skilled Surgeons</li>
-              <li>Partnered with Top NABH & JCI Hospitals</li>
-              <li>100% Insurance Assistance</li>
-              <li>Free Personal Care Manager</li>
-              <li>Easy No-Cost EMI Options</li>
+              <li>100+ NABH & JCI Accredited Hospitals</li>
+              <li>500+ Expert Surgeons</li>
+              <li>10,000+ Happy Patients</li>
+              <li>All Insurances Accepted</li>
+              <li>Transparent Billing</li>
+              <li>Zero Cost EMI Options</li>
             </ul>
           </section>
 
-          <section>
-            <h2 className="text-xl font-semibold mb-2 sm:mb-5">Kidney Stone Treatment Quick Guide</h2>
-            <div className="w-full max-w-5xl mx-auto">
-              <img
-                src="/images/ad1.png"
-                alt="Kidney Stones Treatment Options"
-                className="w-full h-auto rounded-lg shadow"
-              />
-            </div>
-          </section>
+         
 
-          <section>
-            <h2 className="text-xl font-semibold mb-2 sm:mb-5">
-            Why choose <span className="text-indigo-600"> Aapka Care </span> For{' '}
-              <span className="text-black">Kidney Stone Treatment?</span>
-            </h2>
-            <div className="w-full flex justify-center">
-              <img
-                src="/images/ad2.png"
-                alt="Kidney Stone Treatment Comparison"
-                className="w-full max-w-3xl rounded shadow"
-              />
-            </div>
-          </section>
+         
 
           <section className='mb-20'>
             <h2 className="text-xl font-semibold mb-2">Frequently Asked Questions</h2>
@@ -580,7 +446,8 @@ const KidneyStoneAdsPage = () => {
                 Call Expert
               </a>
               <a
-                 href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Kidney%20Stone%20Treatment.%20Please%20send%20mee%20details."
+             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
+               
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
@@ -626,4 +493,4 @@ const KidneyStoneAdsPage = () => {
   );
 };
 
-export default KidneyStoneAdsPage;
+export default  HerniaAdsPage;

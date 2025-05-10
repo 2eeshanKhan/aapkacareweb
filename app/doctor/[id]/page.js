@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
       description: "The requested doctor profile does not exist.",
     };
   }
-
+  
   return {
     title: doctor.name,
     description: doctor.about || `Profile of ${doctor.name}`,

@@ -13,11 +13,7 @@ export const metadata  = {
     url: 'https://aapkacare.com/knee-replacement', // optional but helpful for SEO
     type: 'website',
     },
-    openGraph: {
     
-      url: 'https://aapkacare.com/', // optional but helpful for SEO
-      type: 'website',
-      },
   
 
 }

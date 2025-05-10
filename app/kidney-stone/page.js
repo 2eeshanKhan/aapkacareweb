@@ -13,11 +13,7 @@ export const metadata  = {
     url: 'https://aapkacare.com/kidney-stone', // optional but helpful for SEO
     type: 'website',
     },
-    openGraph: {
-    
-      url: 'https://aapkacare.com/appendicitis', // optional but helpful for SEO
-      type: 'website',
-      },
+   
   
 
 }
