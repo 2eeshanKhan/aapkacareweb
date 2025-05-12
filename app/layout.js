@@ -44,6 +44,30 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <Script
+  id="taboola-script"
+  strategy="afterInteractive"
+  dangerouslySetInnerHTML={{
+    __html: `
+      window._tfa = window._tfa || [];
+      window._tfa.push({notify: 'event', name: 'page_view', id: 1843213});
+      !function (t, f, a, x) {
+        if (!document.getElementById(x)) {
+          t.async = 1;
+          t.src = a;
+          t.id = x;
+          f.parentNode.insertBefore(t, f);
+        }
+      }(
+        document.createElement('script'),
+        document.getElementsByTagName('script')[0],
+        '//cdn.taboola.com/libtrc/unip/1843213/tfa.js',
+        'tb_tfa_script'
+      );
+    `,
+  }}
+/>
+
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=GTM-N26W8RH8`}
@@ -73,6 +97,7 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        
         <noscript>
           <img
             src="//p.tgtag.io/event?property_id=tg-018336-001&event_name=pageview&no_script=1"
@@ -81,6 +106,7 @@ export default function RootLayout({ children }) {
             border="0"
           />
         </noscript>
+        
 
         <ClientLayout>{children}</ClientLayout>
 

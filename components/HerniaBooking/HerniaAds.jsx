@@ -173,6 +173,10 @@ const HerniaAdsPage = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug mb-4 text-sky-800">
           Advanced Hernia Treatment in Mumbai
           </h1>
+          <h1 className="text-xl sm:text-xl md:text-xl font-bold leading-snug mb-4">
+          Painless | Scarless | 30-Minute Day-Care Procedure
+
+          </h1>
           {[
             'Latest 3D Laparoscopic Surgery',
             'Free Doctor Consultation',
@@ -375,6 +379,113 @@ const HerniaAdsPage = () => {
             </div>
           )}
 
+<section className="max-w-5xl mx-auto px-4 py-8">
+            <h2 className="text-2xl font-bold text-sky-800 mb-6 text-center">
+            Best Hernia Doctors Near You
+
+            </h2>
+            <div className="space-y-6">
+  {[
+    {
+      name: "Ankit Vivek Potdar",
+      title: "MBBS, MS (General Surgery), Fellowship in Minimal Access Surgery ",
+      specialization: "General Surgery",
+      experience: "11+ Years Experience",
+      rating: "97%",
+      img: "/images/drankit.png",
+    },
+    {
+      name: "Dr. Mahesh V",
+      title: "MBBS, MS (General Surgery)",
+      specialization: "General Surgery",
+      experience: "8+ Years Experience",
+      rating: "99%",
+      img: "/images/drmahesh.png",
+    },
+    {
+      name: "Dr. Parmeshwar Babulal Bambrule",
+      title: "MBBS, DNB (General Surgery), Fellowship in Surgical Oncology, Fellowship in Bariatric & Metabolic Surgery",
+      specialization: "General Surgery",
+      experience: "12+ Years Experience",
+      rating: "99%",
+      img: "/images/drparmeshwar.png",
+    },
+    {
+      name: "Dr. Saurabh Kumar Goyal",
+      title: "MBBS, MS (General Surgery)",
+      specialization: "General Surgery",
+      experience: "17+ Years Experience",
+      rating: "96%",
+      img: "/images/drsaurabh.png",
+    },
+
+  ].map((doc, idx) => (
+    <div
+      key={idx}
+      className="bg-gradient-to-br from-sky-300 via-sky-200 to-sky-300 p-[2px] rounded-2xl shadow-xl"
+    >
+      <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-6 border border-gray-200">
+        {/* Image */}
+        <div className="flex-shrink-0">
+          <img
+            src={doc.img}
+            alt={doc.name}
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-indigo-100"
+          />
+        </div>
+
+        {/* Info */}
+        <div className="flex flex-col justify-between flex-1 gap-3">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-800">{doc.name}</h3>
+            <p className="text-sm sm:text-base text-gray-600 mt-1">{doc.title}</p>
+            <p className="text-sm text-indigo-600 font-medium mt-1">{doc.specialization}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mt-2">
+            <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-medium rounded-full">
+              📅 {doc.experience}
+            </span>
+            <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 text-xs font-medium rounded-full">
+              👍 {doc.rating} Positive Reviews
+            </span>
+          </div>
+        </div>
+        
+
+        {/* CTA */}
+        <div className="sm:ml-auto sm:self-center">
+          <button
+            onClick={openDialog}
+            className="text-white bg-red-500 hover:bg-red-600 transition-all duration-200 px-6 py-3 rounded-full text-sm sm:text-base font-semibold shadow-md"
+            aria-label={`Book consultation with ${doc.name}`}
+          >
+            Book Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+          </section>
+
+
+
+<div className="bg-lime-50 rounded-2xl p-6 md:p-10 shadow-md flex flex-col md:flex-row md:items-start gap-6 md:gap-10 border-lime-300 border-2">
+  <div className="flex-1 md:text-left">
+    <h3 className="text-3xl font-bold text-green-600">
+      What is Hernia?
+    </h3>
+    <p className="mt-3 text-gray-700 text-base leading-relaxed max-w-xl">
+      A hernia occurs when an internal organ or tissue pushes through a weak spot in the muscles or connective tissue, often resulting in a noticeable bulge and discomfort. Common areas include the abdomen and groin.
+    </p>
+  </div>
+</div>
+
+
+
           
 
           <section className="bg-red-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
@@ -400,6 +511,53 @@ const HerniaAdsPage = () => {
               <li>Zero Cost EMI Options</li>
             </ul>
           </section>
+
+          <div className="overflow-x-auto ">
+      <h2 className="text-2xl font-bold mb-8">
+        Advantages of 3D Laparoscopic Hernia Surgery
+      </h2>
+      <table className="min-w-full border border-gray-300 rounded-lg shadow-md">
+        <thead className="bg-blue-300">
+          <tr>
+            <th className="text-left px-4 py-2 border border-gray-300">Feature</th>
+            <th className="text-left px-4 py-2 border border-gray-300">3D Laparoscopic Repair</th>
+            <th className="text-left px-4 py-2 border border-gray-300">Traditional Laparoscopy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="px-4 py-2 border border-gray-300">Scar & Stitches</td>
+            <td className="px-4 py-2 border border-gray-300">No Scar, No Stitches</td>
+            <td className="px-4 py-2 border border-gray-300">Small Scars & Stitches</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-4 py-2 border border-gray-300">Surgery Time</td>
+            <td className="px-4 py-2 border border-gray-300">30–40 mins</td>
+            <td className="px-4 py-2 border border-gray-300">1–2.5 hours</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-2 border border-gray-300">Recovery Time</td>
+            <td className="px-4 py-2 border border-gray-300">Resume Next Day</td>
+            <td className="px-4 py-2 border border-gray-300">5–7 Days</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-4 py-2 border border-gray-300">Hospital Stay</td>
+            <td className="px-4 py-2 border border-gray-300">24 Hours</td>
+            <td className="px-4 py-2 border border-gray-300">Up to 48 Hours</td>
+          </tr>
+          <tr>
+            <td className="px-4 py-2 border border-gray-300">Pain & Blood Loss</td>
+            <td className="px-4 py-2 border border-gray-300">Minimal</td>
+            <td className="px-4 py-2 border border-gray-300">Moderate</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="px-4 py-2 border border-gray-300">Risk of Complications</td>
+            <td className="px-4 py-2 border border-gray-300">Very Low</td>
+            <td className="px-4 py-2 border border-gray-300">Moderate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
          
 
