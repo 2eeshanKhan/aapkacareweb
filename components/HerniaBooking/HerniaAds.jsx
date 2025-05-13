@@ -394,30 +394,7 @@ const HerniaAdsPage = () => {
       rating: "97%",
       img: "/images/drankit.png",
     },
-    {
-      name: "Dr. Mahesh V",
-      title: "MBBS, MS (General Surgery)",
-      specialization: "General Surgery",
-      experience: "8+ Years Experience",
-      rating: "99%",
-      img: "/images/drmahesh.png",
-    },
-    {
-      name: "Dr. Parmeshwar Babulal Bambrule",
-      title: "MBBS, DNB (General Surgery), Fellowship in Surgical Oncology, Fellowship in Bariatric & Metabolic Surgery",
-      specialization: "General Surgery",
-      experience: "12+ Years Experience",
-      rating: "99%",
-      img: "/images/drparmeshwar.png",
-    },
-    {
-      name: "Dr. Saurabh Kumar Goyal",
-      title: "MBBS, MS (General Surgery)",
-      specialization: "General Surgery",
-      experience: "17+ Years Experience",
-      rating: "96%",
-      img: "/images/drsaurabh.png",
-    },
+   
 
   ].map((doc, idx) => (
     <div
