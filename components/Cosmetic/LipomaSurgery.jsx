@@ -436,6 +436,76 @@ const LipomaSurgeryAdsPage = () => {
             </div>
           )}
 
+
+<section className="max-w-5xl mx-auto px-4 py-8">
+            <h2 className="text-2xl font-bold text-sky-800 mb-6 text-center">
+            Best Lipoma Doctors Near You
+
+            </h2>
+            <div className="space-y-6">
+  {[
+    {
+      name: "Dr. Vicky Ghewarchand Jain",
+      title: "MBBS, MS (General Surgery), MCh (Plastic & Reconstructive Surgery),Fellowship in Aesthetic Surgery ",
+      specialization: "General Surgery",
+      experience: "16+ Years Experience",
+      rating: "100%",
+      img: "/images/drvicky.png",
+    },
+   
+
+  ].map((doc, idx) => (
+    <div
+      key={idx}
+      className="bg-gradient-to-br from-sky-300 via-sky-200 to-sky-300 p-[2px] rounded-2xl shadow-xl"
+    >
+      <div className="bg-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-6 border border-gray-200">
+        {/* Image */}
+        <div className="flex-shrink-0">
+          <img
+            src={doc.img}
+            alt={doc.name}
+            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-indigo-100"
+          />
+        </div>
+
+        {/* Info */}
+        <div className="flex flex-col justify-between flex-1 gap-3">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-800">{doc.name}</h3>
+            <p className="text-sm sm:text-base text-gray-600 mt-1">{doc.title}</p>
+            <p className="text-sm text-indigo-600 font-medium mt-1">{doc.specialization}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mt-2">
+            <span className="inline-flex items-center gap-1 bg-indigo-100 text-indigo-800 px-3 py-1 text-xs font-medium rounded-full">
+              📅 {doc.experience}
+            </span>
+            <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 text-xs font-medium rounded-full">
+              👍 {doc.rating} Positive Reviews
+            </span>
+          </div>
+        </div>
+        
+
+        {/* CTA */}
+        <div className="sm:ml-auto sm:self-center">
+          <button
+            onClick={openDialog}
+            className="text-white bg-red-500 hover:bg-red-600 transition-all duration-200 px-6 py-3 rounded-full text-sm sm:text-base font-semibold shadow-md"
+            aria-label={`Book consultation with ${doc.name}`}
+          >
+            Book Free Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+
+          </section>
+
           
 
           <section className="bg-red-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
