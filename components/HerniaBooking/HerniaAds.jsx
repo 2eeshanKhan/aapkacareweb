@@ -7,8 +7,10 @@ import { getFirestore, doc, setDoc, collection, serverTimestamp } from 'firebase
 import { initializeApp } from 'firebase/app';
 import { db } from "@/module/firebaseConfig";
 import { FaWhatsapp, FaCheckCircle, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const HerniaAdsPage = () => {
+    const router = useRouter();
   const [openIndex, setOpenIndex] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', mobile: '', insurance: '' });
@@ -83,7 +85,7 @@ const HerniaAdsPage = () => {
           createdAt: serverTimestamp(),
         });
        
-        alert(`Thank you, ${formData.name}! We will contact you shortly.`);
+           router.push('/thank-you');
         setFormData({ name: '', mobile: '', insurance: '' });
         setFormErrors({ name: '', mobile: '', insurance: '' });
         setIsDialogOpen(false);
@@ -133,14 +135,14 @@ const HerniaAdsPage = () => {
         />
         <div className="hidden sm:flex gap-4 items-center">
           <a
-            href="tel:9821527088"
+            href="tel:7990486477"
             className="bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
           >
             <PhoneCall className="w-4 h-4 mr-2" />
-            Call 9821527088
+            Call 7990486477
           </a>
           <a
-             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
+             href="https://wa.me/917990486477?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-600 text-white hover:bg-green-500 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
@@ -150,11 +152,11 @@ const HerniaAdsPage = () => {
           </a>
         </div>
         <div className="flex sm:hidden gap-3">
-          <a href="tel:9821527088" className="bg-red-600 p-2 rounded-full text-white">
+          <a href="tel:7990486477" className="bg-red-600 p-2 rounded-full text-white">
             <PhoneCall className="w-5 h-5" />
           </a>
           <a
-             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
+             href="https://wa.me/917990486477?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
            
             target="_blank"
             rel="noopener noreferrer"
@@ -573,7 +575,7 @@ const HerniaAdsPage = () => {
           <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
             <div className="flex gap-4">
               <a
-                href="tel:9821527088"
+                href="tel:7990486477"
                 className="flex-1 bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-3 sm:px-5 rounded-2xl flex items-center justify-center text-sm sm:text-base"
                 aria-label="Call Expert"
               >
@@ -581,7 +583,7 @@ const HerniaAdsPage = () => {
                 Call Expert
               </a>
               <a
-             href="https://wa.me/919821527088?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
+             href="https://wa.me/917990486477?text=Hi%2C%20I%27m%20looking%20for%20Hernia%20Treatment.%20Please%20send%20me%20details."
                
                 target="_blank"
                 rel="noopener noreferrer"
@@ -604,7 +606,7 @@ const HerniaAdsPage = () => {
         {/* Buttons */}
         <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
           <a
-            href="tel:+919821527088"
+            href="tel:+917990486477"
             className="bg-amber-500 text-white px-6 py-2 rounded-full text-sm hover:bg-amber-700 transition"
           >
             📞 Call For Free Consultation

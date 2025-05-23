@@ -7,8 +7,10 @@ import { getFirestore, doc, setDoc, collection, serverTimestamp } from 'firebase
 import { initializeApp } from 'firebase/app';
 import { db } from "@/module/firebaseConfig";
 import { FaWhatsapp, FaCheckCircle, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const AppendectomyAdsPage = () => {
+     const router = useRouter();
   const [openIndex, setOpenIndex] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', mobile: '', insurance: '' });
@@ -75,7 +77,7 @@ const AppendectomyAdsPage = () => {
           createdAt: serverTimestamp(),
         });
        
-        alert(`Thank you, ${formData.name}! We will contact you shortly.`);
+          router.push('/thank-you');
         setFormData({ name: '', mobile: '', insurance: '' });
         setFormErrors({ name: '', mobile: '', insurance: '' });
         setIsDialogOpen(false);
