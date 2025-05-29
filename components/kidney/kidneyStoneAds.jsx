@@ -130,7 +130,7 @@ const KidneyStoneAdsPage = () => {
           className="mb-2 sm:mb-0"
         />
         <div className="hidden sm:flex gap-4 items-center">
-          <a
+          {/* <a
             href="tel:9821527088"
             className="bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
           >
@@ -145,10 +145,17 @@ const KidneyStoneAdsPage = () => {
           >
             <FaWhatsapp className="w-4 h-4 mr-2" />
             Chat with Kidney Expert
-          </a>
+          </a> */}
+             <button
+                onClick={openDialog}
+                className=" bg-green-600 hover:bg-green-700 transition-colors text-white px-7 py-2.5 rounded-sm font-medium text-sm md:text-base shadow"
+                aria-label="Calculate Surgery Cost"
+              >
+                Book Consultation
+              </button>
         </div>
         <div className="flex sm:hidden gap-3">
-          <a href="tel:9821527088" className="bg-red-600 p-2 rounded-full text-white">
+          {/* <a href="tel:9821527088" className="bg-red-600 p-2 rounded-full text-white">
             <PhoneCall className="w-5 h-5" />
           </a>
           <a
@@ -158,7 +165,14 @@ const KidneyStoneAdsPage = () => {
             className="bg-green-600 p-2 rounded-full text-white"
           >
             <FaWhatsapp className="w-5 h-5" />
-          </a>
+          </a> */}
+            <button
+                onClick={openDialog}
+                className=" bg-rose-600 hover:bg-rose-700 transition-colors text-white px-3 py-2.5 rounded-sm font-small text-sm md:text-base shadow"
+                aria-label="Calculate Surgery Cost"
+              >
+                Book Consultation
+              </button>
         </div>
       </div>
 

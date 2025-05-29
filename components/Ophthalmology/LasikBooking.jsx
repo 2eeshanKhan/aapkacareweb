@@ -158,14 +158,21 @@ const LasikBooking = () => {
                 className="mb-2 sm:mb-0"
               />
               <div className="hidden sm:flex gap-4 items-center">
-                <a
+                  <button
+                onClick={openDialog}
+                className=" bg-green-600 hover:bg-green-700 transition-colors text-white px-7 py-2.5 rounded-sm font-medium text-sm md:text-base shadow"
+                aria-label="Calculate Surgery Cost"
+              >
+                Book Consultation
+              </button>
+                {/* <a
                   href="tel:9987537993"
                   className="bg-red-600 text-white hover:bg-orange-600 font-medium py-3 px-5 rounded-4xl flex items-center text-base"
                 >
                   <PhoneCall className="w-4 h-4 mr-2" />
                   Call 9987537993
-                </a>
-                <a
+                </a> */}
+                {/* <a
   href="https://wa.me/919987537993?text=Hi%2C%20I%27m%20interested%20in%20LASIK%20Eye%20Surgery.%20Please%20share%20the%20details."
                   
                   target="_blank"
@@ -174,9 +181,9 @@ const LasikBooking = () => {
                 >
                   <FaWhatsapp className="w-4 h-4 mr-2" />
                   Chat with Lasik Expert
-                </a>
+                </a> */}
               </div>
-              <div className="flex sm:hidden gap-3">
+              {/* <div className="flex sm:hidden gap-3">
                 <a href="tel:9987537993" className="bg-red-600 p-2 rounded-full text-white">
                   <PhoneCall className="w-5 h-5" />
                 </a>
@@ -189,6 +196,17 @@ const LasikBooking = () => {
                 >
                   <FaWhatsapp className="w-5 h-5" />
                 </a>
+              </div> */}
+              
+              <div className="flex sm:hidden gap-3">
+                 <button
+                onClick={openDialog}
+                className=" bg-rose-600 hover:bg-rose-700 transition-colors text-white px-3 py-2.5 rounded-sm font-small text-sm md:text-base shadow"
+                aria-label="Calculate Surgery Cost"
+              >
+                Book Consultation
+              </button>
+
               </div>
             </div>
       
