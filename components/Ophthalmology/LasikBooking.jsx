@@ -163,7 +163,7 @@ const LasikBooking = () => {
                 className=" bg-green-600 hover:bg-green-700 transition-colors text-white px-7 py-2.5 rounded-sm font-medium text-sm md:text-base shadow"
                 aria-label="Calculate Surgery Cost"
               >
-                Book Consultation
+                Book Free Consultation
               </button>
                 {/* <a
                   href="tel:9987537993"
@@ -198,13 +198,13 @@ const LasikBooking = () => {
                 </a>
               </div> */}
               
-              <div className="flex sm:hidden gap-3">
+              <div className="flex sm:hidden ">
                  <button
                 onClick={openDialog}
-                className=" bg-rose-600 hover:bg-rose-700 transition-colors text-white px-3 py-2.5 rounded-sm font-small text-sm md:text-base shadow"
+                className=" bg-rose-600 hover:bg-rose-700 transition-colors text-white px-2 py-3 rounded-sm font-small text-xs md:text-base shadow"
                 aria-label="Calculate Surgery Cost"
               >
-                Book Consultation
+                Book Free Consultation
               </button>
 
               </div>
@@ -616,7 +616,7 @@ const LasikBooking = () => {
           
           
 
-          <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
+          {/* <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
             <div className="flex gap-4">
               <a
                 href="tel:9987537993"
@@ -638,7 +638,18 @@ const LasikBooking = () => {
 </a>
 
             </div>
-          </div>
+          </div> */}
+             <div className="fixed bottom-0 left-0 right-0 z-50 bg-white shadow-md md:hidden p-4">
+  <div className="flex justify-center">
+    <button
+      onClick={openDialog}
+      className="w-full bg-rose-600 hover:bg-rose-700 transition-colors text-white px-4 py-3 rounded-md text-base font-medium shadow"
+      aria-label="Calculate Surgery Cost"
+    >
+      Book Free Consultation
+    </button>
+  </div>
+</div>
         </div>
         <div className="hidden md:block md:w-[40%]"></div>
       </div>
